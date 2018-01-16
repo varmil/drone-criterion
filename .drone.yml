@@ -2,7 +2,8 @@ pipeline:
   build:
     image: edouardlopez/docker-criterion:latest
     commands:
-      # - cd work
+      - pwd
+      - mkdir build
       - gcc -o build/sample work/sample.c -lcriterion
       - build/sample
 
