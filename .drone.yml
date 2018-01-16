@@ -4,7 +4,7 @@ pipeline:
     commands:
       - mkdir build
       - gcc -o build/out testcase/test.c src/*.c -lcriterion
-      - build/out --filter execise/${TESTRANGE}
+      - build/out --pattern execise/${TESTRANGE}
 
 matrix:
   TESTRANGE: [ 1, 2 ]
