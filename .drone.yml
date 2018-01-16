@@ -6,7 +6,7 @@ pipeline:
       - gcc -o build/sample sample.c -lcriterion && build/sample
 
 # matrix:
-#   TESTRANGE: [ 1, 2, 3 ]
+#   TESTRANGE: [ 1, 2 ]
 
 workspace:
   base: /tests
