@@ -1,9 +1,9 @@
 #include <criterion/criterion.h>
 
-Test(misc, failing) {
-        cr_assert(0);
+Test(execise, 1) {
+    cr_assert(sum(1, 2) == 3);
 }
 
-Test(misc, passing) {
-        cr_assert(1);
+Test(execise, 2) {
+    cr_assert(square(3) == 9);
 }
