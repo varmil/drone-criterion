@@ -10,9 +10,9 @@ pipeline:
 # matrix:
 #   TESTRANGE: [ 1, 2 ]
 
-workspace:
-  base: /tests
-  path: src/github.com/varmil/drone-criterion
+# workspace:
+#   base: /tests
+#   path: src/github.com/varmil/drone-criterion
 
 guide:
   name: C test
