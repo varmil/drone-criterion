@@ -3,7 +3,7 @@ pipeline:
     image: edouardlopez/docker-criterion:latest
     commands:
       - mkdir build
-      - gcc -o build/out testcase/test.c src/*.c -lcriterion
+      - gcc -I include -o build/out testcase/test.c src/*.c -lcriterion
       - build/out --pattern execise/${TESTRANGE}
 
 matrix:

@@ -1,4 +1,5 @@
 #include <criterion/criterion.h>
+#include "my_math.h"
 
 Test(execise, 1) {
     cr_assert(sum(1, 2) == 3);

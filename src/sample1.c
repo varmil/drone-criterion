@@ -1,5 +1,4 @@
-int sum(int, int);
-int square(int);
+#include "my_math.h"
 
 int sum(int a, int b)
 {
