@@ -1,0 +1,21 @@
+pipeline:
+  build:
+    image: edouardlopez/docker-criterion:latest
+    commands:
+      - cd work
+      - gcc -o build/sample sample.c -lcriterion && build/sample
+
+# matrix:
+#   TESTRANGE: [ 1, 2, 3 ]
+
+workspace:
+  base: /tests
+  path: src/github.com/varmil/drone-criterion
+
+guide:
+  name: C test
+  desc: >
+    Example project to demonstrate unit testing C
+    code
+  labels:
+    - C
