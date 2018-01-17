@@ -7,7 +7,7 @@ pipeline:
       - build/out --pattern execise/${TESTRANGE}
 
 matrix:
-  TESTRANGE: [ 1, 2 ]
+  TESTRANGE: [ 1, 2, 3 ]
 
 guide:
   name: C test
