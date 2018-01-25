@@ -41,3 +41,18 @@ unsigned int PickupGreen(unsigned int argb);
 
 /* ### 任意の文字のANSIキャラクタコード(16進)を得よ(work07) ### */
 char *getItemCSV(const char *csvData, int index);
+
+/* ### 曜日を示す文字列へのポインタを返す関数を作成せよ(work8) ### 
+ * ただし日曜日を0とし、土曜日を6とする
+ */
+char *strweek(int n);
+
+/* ### 呼ぶたびにパターンが点滅する関数を作成せよ(work9) ### */
+unsigned int blinkPattern(unsigned int pattern);
+
+/* ### 処理系ごとにint型のサイズが異なる。このシステムのint型のサイズを調べる関数を作成せよ(work10) ### */
+int getIntByteSize(void);
+
+/* ### data1の下位8bitを上位8bitとし、data2の上位8bitを下位8bitとしたビット列を
+ * 反転した値を表示する関数を作成せよ(work11)  ### */
+unsigned short make16BitData(unsigned short data1, unsigned short data2);

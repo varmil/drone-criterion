@@ -84,9 +84,7 @@ Test(execise, 5) {
 #define ARGB8888(a,r,g,b)  ((unsigned int)((((a) & 0xff)<<24) | (((r) & 0xff)<<16) | (((g) & 0xff)<<8) | ((b) & 0xff)))
 
 Test(execise, 6) {
-
     unsigned int argbColor = ARGB8888(0x12, 0x34, 0x56, 0x78);
-
     unsigned int colorG = 0x00;
 
     colorG = PickupGreen(argbColor);
@@ -96,7 +94,6 @@ Test(execise, 6) {
 
 // カンマ区切りの文字列データのn番目の要素を取り出せ(work7)
 Test(execise, 7) {
-
     const char csvData[]="SQL,C,PHP,JavaScript,Linux,HTML,bash";
 
 	char *copyStr = (char *)malloc(sizeof(csvData));
@@ -106,4 +103,32 @@ Test(execise, 7) {
     cr_assert(strcmp(getItemCSV(copyStr, 5), "HTML") == 0, "csv parse error");
 
     free(copyStr);
+}
+
+// 曜日を示す文字列へのポインタを返す関数を作成せよ(work8)
+// ただし日曜日を0とし、土曜日を6とする
+Test(execise, 8) {
+    cr_assert(strcmp(strweek(0), "Sunday") == 0, "week mistake");
+    cr_assert(strcmp(strweek(6), "Saturday") == 0, "week mistake");
+}
+
+// 呼ぶたびにパターンが点滅する関数を作成せよ(work9)
+Test(execise, 9) {
+    unsigned int basePattern = 0xabcd;
+
+    cr_assert(blinkPattern(basePattern) == 0xabcd, "NG Pattern");
+    cr_assert(blinkPattern(basePattern) == 0x0, "NG Pattern");
+    cr_assert(blinkPattern(basePattern) == 0xabcd, "NG Pattern");
+}
+
+// 処理系ごとにint型のサイズが異なる。
+// このシステムのint型のサイズを調べる関数を作成せよ(work10)
+Test(execise, 10) {
+    cr_assert(getIntByteSize() == 4, "size mistake");
+}
+
+// data1の下位8bitを上位8bitとし、data2の上位8bitを下位8bitとしたビット列を
+// 反転した値を表示する関数を作成せよ(work11)
+Test(execise, 11) {
+    cr_assert(make16BitData(0xabcd, 0x1234) == 0x32ed, "bitdata mistake");
 }
