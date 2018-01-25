@@ -23,8 +23,7 @@ typedef struct {
 
 void sortPrice( Choco *list, int n );
 
-/* ### 任意の人物たちの「名前」と「年齢」と次々リストに登録していき
- * 最後に一覧を表示せよ(work05) ### */
+/* ### 任意の人物たちの「名前」と「年齢」と次々リストに登録していき、最後にリスト一覧を表示せよ(work05) ### */
 typedef struct memberlist{
 	int key;			/* キー */
 	char name[NAMELEN];		/* 名前 */
@@ -34,3 +33,11 @@ typedef struct memberlist{
 MemberList *add_list(int key, char *name, MemberList *head);
 void show_list(MemberList *p);
 void free_list(MemberList *p);
+
+/* ### 下記ビット配置のARGB8888フォーマットにおけるGreen値を抽出せよ(work6) ###
+ * #define ARGB8888(a,r,g,b)  ((unsigned int)((((a) & 0xff)<<24) | (((r) & 0xff)<<16) | (((g) & 0xff)<<8) | ((b) & 0xff)))
+ */
+unsigned int PickupGreen(unsigned int argb);
+
+/* ### 任意の文字のANSIキャラクタコード(16進)を得よ(work07) ### */
+char *getItemCSV(const char *csvData, int index);

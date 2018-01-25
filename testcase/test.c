@@ -1,7 +1,7 @@
 #include <criterion/criterion.h>
-#include <string.h>
-
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #include "common_work.h"
 
@@ -63,7 +63,7 @@ Test(execise, 5) {
     int num = sizeof(name)/sizeof(*name);
     int indexNo;
 
-    for( indexNo=0 ; indexNo<num ; indexNo++ ){
+    for( indexNo = 0 ; indexNo < num ; indexNo++ ){
         head = add_list(indexNo, name[indexNo], head);
 	}
 
@@ -71,11 +71,39 @@ Test(execise, 5) {
 	show_list(head);
 
     MemberList *p = head;
-    cr_assert(strcmp(p->name, "kuwata")     == 0, "list0 error"); p = p->next;
-    cr_assert(strcmp(p->name, "yamamoto")   == 0, "list1 error"); p = p->next;
-    cr_assert(strcmp(p->name, "matsuo")     == 0, "list2 error"); p = p->next;
-    cr_assert(strcmp(p->name, "ashihara")   == 0, "list3 error");
+    cr_assert(strcmp(p->name, "ashihara") == 0, "list0 error"); p = p->next;
+    cr_assert(strcmp(p->name, "matsuo")   == 0, "list1 error"); p = p->next;
+    cr_assert(strcmp(p->name, "yamamoto") == 0, "list2 error"); p = p->next;
+    cr_assert(strcmp(p->name, "kuwata")   == 0, "list3 error");
 
 	/* リストの開放 */
 	free_list(head);
+}
+
+// 下記ビット配置のARGB8888フォーマットにおけるGreen値を抽出せよ(work6)
+#define ARGB8888(a,r,g,b)  ((unsigned int)((((a) & 0xff)<<24) | (((r) & 0xff)<<16) | (((g) & 0xff)<<8) | ((b) & 0xff)))
+
+Test(execise, 6) {
+
+    unsigned int argbColor = ARGB8888(0x12, 0x34, 0x56, 0x78);
+
+    unsigned int colorG = 0x00;
+
+    colorG = PickupGreen(argbColor);
+
+    cr_assert(colorG == 0x56, "color unmatching");
+}
+
+// カンマ区切りの文字列データのn番目の要素を取り出せ(work7)
+Test(execise, 7) {
+
+    const char csvData[]="SQL,C,PHP,JavaScript,Linux,HTML,bash";
+
+	char *copyStr = (char *)malloc(sizeof(csvData));
+    strcpy(copyStr, csvData);
+    cr_assert(strcmp(getItemCSV(copyStr, 0), "SQL") == 0, "csv parse error");
+    strcpy(copyStr, csvData);
+    cr_assert(strcmp(getItemCSV(copyStr, 5), "HTML") == 0, "csv parse error");
+
+    free(copyStr);
 }

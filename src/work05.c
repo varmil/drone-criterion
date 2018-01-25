@@ -4,7 +4,7 @@
 
 #include "common_work.h"
 
-MemberList *add_list(int key, char *name, MemberList *head)
+MemberList* add_list(int key, char *name, MemberList *head)
 {
 #ifdef _ANSWER_
 	MemberList *p;
@@ -19,9 +19,20 @@ MemberList *add_list(int key, char *name, MemberList *head)
 	p->key = key;
 	strcpy(p->name, name);
 	
-	/* ポインタのつなぎ換え */
-	p->next = head;		/* 今までの先頭ポインタを次ポインタに */
-	head = p;			/* 新たな領域を先頭ポインタに */
+	if( head==NULL ){ // ヘッダ要素なければ追加
+		head = p;
+		p->next = NULL;
+	}
+	else{
+		// 末尾探索
+		MemberList *itr = head;
+		while( itr->next != NULL ){
+			itr = itr->next;
+		}
+		// 要素追加
+		itr->next = p;
+		p->next = NULL;
+	}
 #else
 
 #endif
@@ -50,4 +61,3 @@ void show_list(MemberList *p)
 	}
 #endif
 }
-

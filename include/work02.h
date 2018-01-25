@@ -1,1 +1,0 @@
-void my_strcpy(char *dstStr, const char *srcStr);
