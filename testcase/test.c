@@ -98,9 +98,9 @@ Test(execise, 7) {
 
 	char *copyStr = (char *)malloc(sizeof(csvData));
     strcpy(copyStr, csvData);
-    cr_assert(strcmp(getItemCSV(copyStr, 0), "SQL") == 0, "csv parse error");
+    cr_assert(strcmp(getItemCSV(copyStr, 0), "SQL") == 0, "SQL parse error");
     strcpy(copyStr, csvData);
-    cr_assert(strcmp(getItemCSV(copyStr, 5), "HTML") == 0, "csv parse error");
+    cr_assert(strcmp(getItemCSV(copyStr, 5), "HTML") == 0, "HTML parse error");
 
     free(copyStr);
 }
@@ -108,17 +108,17 @@ Test(execise, 7) {
 // 曜日を示す文字列へのポインタを返す関数を作成せよ(work8)
 // ただし日曜日を0とし、土曜日を6とする
 Test(execise, 8) {
-    cr_assert(strcmp(strweek(0), "Sunday") == 0, "week mistake");
-    cr_assert(strcmp(strweek(6), "Saturday") == 0, "week mistake");
+    cr_assert(strcmp(strweek(0), "Sunday") == 0, "週初め取得できず");
+    cr_assert(strcmp(strweek(6), "Saturday") == 0, "週末取得できず");
 }
 
 // 呼ぶたびにパターンが点滅する関数を作成せよ(work9)
 Test(execise, 9) {
     unsigned int basePattern = 0xabcd;
 
-    cr_assert(blinkPattern(basePattern) == 0xabcd, "NG Pattern");
-    cr_assert(blinkPattern(basePattern) == 0x0, "NG Pattern");
-    cr_assert(blinkPattern(basePattern) == 0xabcd, "NG Pattern");
+    cr_assert(blinkPattern(basePattern) == 0xabcd, "初回点灯 NG");
+    cr_assert(blinkPattern(basePattern) == 0x0, "消灯 NG");
+    cr_assert(blinkPattern(basePattern) == 0xabcd, "再点灯 NG");
 }
 
 // 処理系ごとにint型のサイズが異なる。
@@ -131,4 +131,53 @@ Test(execise, 10) {
 // 反転した値を表示する関数を作成せよ(work11)
 Test(execise, 11) {
     cr_assert(make16BitData(0xabcd, 0x1234) == 0x32ed, "bitdata mistake");
+}
+
+ // 小数点以下を四捨五入する関数を自作せよ(work12)
+Test(execise, 12) {
+    cr_assert(myRound(5.4) == 5, "切り下げ error");
+    cr_assert(myRound(5.5) == 6, "切り上げ error");
+}
+
+// 任意の数のポインターの配列を使って、それぞれに1バイト領域を割り当て、要素を0xbeで埋めたのち、解放せよ(work13)
+#define ARRAY_NUM   3
+
+Test(execise, 13) {
+
+    unsigned char *p[ARRAY_NUM] = { NULL, NULL, NULL };
+
+    allocMyArray( p, ARRAY_NUM, 0xbe );
+
+    cr_assert(p[0] != NULL, "p0 null");
+    cr_assert(p[1] != NULL, "p1 null");
+    cr_assert(p[2] != NULL, "p2 null");
+
+    cr_assert(*p[0] == 0xbe, "p0 value set error");
+    cr_assert(*p[1] == 0xbe, "p1 value set error");
+    cr_assert(*p[2] == 0xbe, "p2 value set error");
+
+    freeMyArray(p, ARRAY_NUM);
+}
+
+// 下記の演算関数を作成せよ(work14)
+Test(execise, 14) {
+    unsigned char a = 0xc5;
+    unsigned char b = 0x96;
+
+    cr_assert(calcReverse(a)        == 0x3a, "reverse error");  // 反転
+    cr_assert(calcXOR(a, b)         == 0x53, "xor error");      // 排他的論理和
+    cr_assert(calcBitMask(a, b)     == 0x84, "mask error");     // ビットマスク
+    cr_assert(calcBitEnable(a, b)   == 0xd7, "eneble error");   // 特定ビットを常に有効にする
+
+    calcIncrement(&a);
+    cr_assert(a == 0xc6, "inc error"); // インクリメント
+    calcDecrement(&b);
+    cr_assert(b == 0x95, "dec error"); // デクリメント
+}
+
+Test(execise, 15) {
+    char testStr[] = "abcdefghijklmnopqrstuvwxyz";
+
+    cr_assert(searchChar(testStr, 'd') == 3, "d index error");  // d
+    cr_assert(searchChar(testStr, '@') == -1, "@ index error");  // @
 }

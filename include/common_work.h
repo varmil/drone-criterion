@@ -54,5 +54,23 @@ unsigned int blinkPattern(unsigned int pattern);
 int getIntByteSize(void);
 
 /* ### data1の下位8bitを上位8bitとし、data2の上位8bitを下位8bitとしたビット列を
- * 反転した値を表示する関数を作成せよ(work11)  ### */
+ * 反転した値を表示する関数を作成せよ(work11) ### */
 unsigned short make16BitData(unsigned short data1, unsigned short data2);
+
+ /* ### 小数点以下を四捨五入する関数を自作せよ(work12) ### */
+int myRound(double num);
+
+/* ### 任意の数のポインターの配列を使って、それぞれに1バイト領域を割り当て、要素を0xbeで埋めたのち、解放せよ(work13) ### */
+void allocMyArray( unsigned char **p, unsigned int num, unsigned short pattern);
+void freeMyArray( unsigned char **p, unsigned int num);
+
+/* ### 各種演算関数を作成せよ(work14) ### */
+unsigned char calcReverse(unsigned char val);
+unsigned char calcXOR(unsigned char a, unsigned char b);
+unsigned char calcBitMask(unsigned char a, unsigned char b);
+unsigned char calcBitEnable(unsigned char a, unsigned char b);
+void calcIncrement(unsigned char *val);
+void calcDecrement(unsigned char *val);
+
+/**/
+int searchChar(unsigned char *str, unsigned char chara);
