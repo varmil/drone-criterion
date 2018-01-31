@@ -175,9 +175,28 @@ Test(execise, 14) {
     cr_assert(b == 0x95, "dec error"); // デクリメント
 }
 
+// 文字列から任意の文字が初めて出現する位置を求める関数を作成せよ(work15)
 Test(execise, 15) {
     char testStr[] = "abcdefghijklmnopqrstuvwxyz";
 
     cr_assert(searchChar(testStr, 'd') == 3, "d index error");  // d
-    cr_assert(searchChar(testStr, '@') == -1, "@ index error");  // @
+    cr_assert(searchChar(testStr, '@') == -1, "@ index error");  // 不正文字
+}
+
+// 当該データ構造における各種関数を作成せよ(work16)
+Test(execise, 16) {
+    Student students[]={
+        { "yamamoto",{100,100,100,100 } },
+        { "kuwata",  { 10, 20, 30, 40 } },
+        { "iggy",    { 12, 34, 56, 78 } },
+    };
+
+	int num = sizeof(students)/sizeof(Student);
+    cr_assert(CalcSubjectAverage(students, num, JAPANESE) == 62, "Japanese average error");
+    cr_assert(CalcAllAverage(students, num) == 56, "all average error");
+    Grade *grade = GetGrade(students, num, "kuwata");
+    if( grade ){
+        cr_assert(grade->subjects[ENGLISH] == 10, "kuwata\'s English error");
+    }
+    // gradeがNULLのときのAssertが必要
 }

@@ -61,8 +61,8 @@ unsigned short make16BitData(unsigned short data1, unsigned short data2);
 int myRound(double num);
 
 /* ### 任意の数のポインターの配列を使って、それぞれに1バイト領域を割り当て、要素を0xbeで埋めたのち、解放せよ(work13) ### */
-void allocMyArray( unsigned char **p, unsigned int num, unsigned short pattern);
-void freeMyArray( unsigned char **p, unsigned int num);
+void allocMyArray(unsigned char **p, unsigned int num, unsigned short pattern);
+void freeMyArray(unsigned char **p, unsigned int num);
 
 /* ### 各種演算関数を作成せよ(work14) ### */
 unsigned char calcReverse(unsigned char val);
@@ -72,5 +72,28 @@ unsigned char calcBitEnable(unsigned char a, unsigned char b);
 void calcIncrement(unsigned char *val);
 void calcDecrement(unsigned char *val);
 
-/**/
+/* ### 文字列から任意の文字が初めて出現する位置を求める関数を作成せよ(work15) ### */
 int searchChar(unsigned char *str, unsigned char chara);
+
+/* ### 下記データ構造における各関数を作成せよ(work16) ### */
+typedef enum SUBJECT{
+    ENGLISH,
+    FRANCH,
+    JAPANESE,
+    CHINESE,
+
+    SUBJECT_MAX
+}Subject;
+
+typedef struct grade{
+    int subjects[SUBJECT_MAX];
+} Grade;
+
+typedef struct student{
+	char name[NAMELEN]; // 名前
+    Grade grade;        // 成績
+} Student;
+
+int CalcSubjectAverage(Student *students, int num, Subject subject); // 科目別の平均点(ただし、小数点以下は切り捨てる)
+int CalcAllAverage(Student *students, int num); // 全生徒の平均点(ただし、小数点以下は切り捨てる)
+Grade *GetGrade(Student *students, int num, char *studentName); // 任意の生徒の成績データ全体を得る
