@@ -7,10 +7,10 @@ void swap( void )
 #endif
 {
 #ifdef _ANSWER_
-    int tmp;
+	int tmp;
 
-    tmp = *a;
-    *a = *b;
-    *b = tmp;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 #endif
 }

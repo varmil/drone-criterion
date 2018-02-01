@@ -8,17 +8,17 @@ MemberList* add_list(int key, char *name, MemberList *head)
 {
 #ifdef _ANSWER_
 	MemberList *p;
-	
+
 	/* 記憶領域の確保 */
 	if ((p = (MemberList *) malloc(sizeof(MemberList))) == NULL) {
 		printf("malloc error\n");
 		exit(EXIT_FAILURE);
 	}
-	
+
 	/* リストにデータを登録 */
 	p->key = key;
 	strcpy(p->name, name);
-	
+
 	if( head==NULL ){ // ヘッダ要素なければ追加
 		head = p;
 		p->next = NULL;

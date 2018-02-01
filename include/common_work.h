@@ -16,9 +16,9 @@ char *int_to_str(int value);
 /* ### 下記データを価格順(降順)にソートする関数を作成せよ。(work04) ### */
 #define NAMELEN 20
 typedef struct {
-    int hb;             //品番
-    char name[NAMELEN]; //商品名
-    int price;          //価格
+	int hb;             //品番
+	char name[NAMELEN]; //商品名
+	int price;          //価格
 } Choco;
 
 void sortPrice( Choco *list, int n );
@@ -53,47 +53,61 @@ unsigned int blinkPattern(unsigned int pattern);
 /* ### 処理系ごとにint型のサイズが異なる。このシステムのint型のサイズを調べる関数を作成せよ(work10) ### */
 int getIntByteSize(void);
 
-/* ### data1の下位8bitを上位8bitとし、data2の上位8bitを下位8bitとしたビット列を
- * 反転した値を表示する関数を作成せよ(work11) ### */
+/* ### data1の下位8bitを上位8bitとし、data2の上位8bitを下位8bitとしたビット列を反転した値を表示する関数を作成せよ(work11) ### */
 unsigned short make16BitData(unsigned short data1, unsigned short data2);
 
- /* ### 小数点以下を四捨五入する関数を自作せよ(work12) ### */
+/* ### 小数点以下を四捨五入する関数を自作せよ(work12) ### */
 int myRound(double num);
 
 /* ### 任意の数のポインターの配列を使って、それぞれに1バイト領域を割り当て、要素を0xbeで埋めたのち、解放せよ(work13) ### */
-void allocMyArray(unsigned char **p, unsigned int num, unsigned short pattern);
-void freeMyArray(unsigned char **p, unsigned int num);
+void allocMyArray(unsigned char **p, unsigned int num, unsigned short pattern); // 領域を割り当て、パターンで埋める
+void freeMyArray(unsigned char **p, unsigned int num); // 割り当てた領域を解放する
 
-/* ### 各種演算関数を作成せよ(work14) ### */
+/* ### 各種演算関数を作成せよ(work14) ### 
+ * ・バイトデータを反転した値を得る関数
+ * ・２つのバイトデータの排他的論理和を得る関数
+ * ・任意のバイトデータを任意のバイトデータでビットマスクする関数
+ * ・任意のバイトデータの任意のバイトデータのビットで強制的に有効にする関数
+ */
 unsigned char calcReverse(unsigned char val);
 unsigned char calcXOR(unsigned char a, unsigned char b);
 unsigned char calcBitMask(unsigned char a, unsigned char b);
 unsigned char calcBitEnable(unsigned char a, unsigned char b);
-void calcIncrement(unsigned char *val);
-void calcDecrement(unsigned char *val);
 
 /* ### 文字列から任意の文字が初めて出現する位置を求める関数を作成せよ(work15) ### */
 int searchChar(unsigned char *str, unsigned char chara);
 
-/* ### 下記データ構造における各関数を作成せよ(work16) ### */
-typedef enum SUBJECT{
-    ENGLISH,
-    FRANCH,
-    JAPANESE,
-    CHINESE,
+/* ### 下記データ構造における各関数を作成せよ(work16) ### 
+ * ・全生徒の科目別の平均点を得る関数
+ * ・全生徒、全科目の平均点を得る関数
+ * ・生徒名から、その生徒の成績データ全体(grade構造体へのポインタ)を得る関数
+ */
 
-    SUBJECT_MAX
+typedef enum SUBJECT{
+	ENGLISH,
+	FRANCH,
+	JAPANESE,
+	CHINESE,
+
+	SUBJECT_MAX
 }Subject;
 
 typedef struct grade{
-    int subjects[SUBJECT_MAX];
+	int subjects[SUBJECT_MAX]; // 科目
 } Grade;
 
 typedef struct student{
 	char name[NAMELEN]; // 名前
-    Grade grade;        // 成績
+	Grade grade;        // 成績
 } Student;
 
-int CalcSubjectAverage(Student *students, int num, Subject subject); // 科目別の平均点(ただし、小数点以下は切り捨てる)
-int CalcAllAverage(Student *students, int num); // 全生徒の平均点(ただし、小数点以下は切り捨てる)
-Grade *GetGrade(Student *students, int num, char *studentName); // 任意の生徒の成績データ全体を得る
+int calcSubjectAverage(Student *students, int num, Subject subject); // 科目別の平均点(ただし、小数点以下は切り捨てる)
+int calcAllAverage(Student *students, int num); // 全生徒の平均点(ただし、小数点以下は切り捨てる)
+Grade *getGrade(Student *students, int num, char *studentName); // 任意の生徒の成績データ全体を得る
+
+/* ### キャリーなし左右ローテート関数を作り、ビットパターンが1ビットずつ移動するアニメーションを作成せよ(work17) ### 
+ * ただし、処理系が算術シフト、論理シフトいずれを採用していても結果が変わらないように注意せよ
+ */
+unsigned char rotateLeft(unsigned char val);
+unsigned char rotateRight(unsigned char val);
+

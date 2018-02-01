@@ -5,12 +5,12 @@
 char *int_to_str(int value)
 {
 #ifdef _ANSWER_
-    static char buf[80];
+	static char buf[80];
 
-    sprintf(buf, "%d", value);
+	sprintf(buf, "%d", value);
 
-    return buf;
+	return buf;
 #else
-    return NULL;
+	return NULL;
 #endif
 }

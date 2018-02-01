@@ -39,17 +39,3 @@ unsigned char calcBitEnable(unsigned char a, unsigned char b)
 #endif
 	return result;
 }
-
-void calcIncrement(unsigned char *val)
-{
-#ifdef _ANSWER_
-	++(*val);
-#endif
-}
-
-void calcDecrement(unsigned char *val)
-{
-#ifdef _ANSWER_
-	--(*val);
-#endif
-}

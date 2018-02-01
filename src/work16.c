@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int CalcSubjectAverage(Student *students, int num, Subject subject)
+int calcSubjectAverage(Student *students, int num, Subject subject)
 {
 	int ave = 0.0;
 
@@ -18,7 +18,7 @@ int CalcSubjectAverage(Student *students, int num, Subject subject)
 	return ave;	
 }
 
-int CalcAllAverage(Student *students, int num)
+int calcAllAverage(Student *students, int num)
 {
 	int ave = 0.0;
 
@@ -36,10 +36,11 @@ int CalcAllAverage(Student *students, int num)
 	return ave;
 }
 
-Grade *GetGrade(Student *students, int num, char *studentName)
+Grade *getGrade(Student *students, int num, char *studentName)
 {
-#ifdef _ANSWER_
 	Grade *grade = NULL;
+
+#ifdef _ANSWER_
 	int i;
 
 	for( i=0 ; i<num ; i++ ){
@@ -50,9 +51,6 @@ Grade *GetGrade(Student *students, int num, char *studentName)
 			students++;
 		}
 	}	
-
-	return grade;
-#else
-	return NULL;
 #endif
+	return grade;
 }
