@@ -219,3 +219,15 @@ Test(execise, 17) {
 	data = rotateRight(data);
 	cr_assert(data == 0x30, "RotateRight3 error");
 }
+
+// ### 文字列strSrcの中から文字列strMatcを探し、その位置を返す関数を作成する。ただし、下記の仕様に沿うこと(work18) ###
+// ・最初に見つけた位置ではなく、最後に見つけた位置を返す
+// ・見つからなかったら-1を返すこと。strstr関数を使用して良い
+Test(execise, 18) {
+	char *strSrc1 = "abcdefdefdef"; // 探索文字列その1
+	char *strSrc2 = "a"; // 探索文字列その2
+	char *strMatch = "def"; // マッチング対象文字列
+
+	cr_assert(strlaststr(strSrc1, strMatch) == 9);
+	cr_assert(strlaststr(strSrc2, strMatch) == -1);
+}
