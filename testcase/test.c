@@ -220,8 +220,7 @@ Test(execise, 17) {
 	cr_assert(data == 0x30, "RotateRight3 error");
 }
 
-// ### 文字列strSrcの中から文字列strMatcを探し、その位置を返す関数を作成する。ただし、下記の仕様に沿うこと(work18) ###
-// ・最初に見つけた位置ではなく、最後に見つけた位置を返す
+// 文字列strSrcの中から文字列strMatcを探し、その最後にみつけた位置を返す関数を作成する。(work18) 
 // ・見つからなかったら-1を返すこと。strstr関数を使用して良い
 Test(execise, 18) {
 	char *strSrc1 = "abcdefdefdef"; // 探索文字列その1
@@ -230,4 +229,18 @@ Test(execise, 18) {
 
 	cr_assert(strlaststr(strSrc1, strMatch) == 9);
 	cr_assert(strlaststr(strSrc2, strMatch) == -1);
+}
+
+// 4バイト確保されているメモリブロックに対し、下記の操作を行う関数を作成せよ(work19)
+// ・メモリブロックの先頭から１バイトずつ、0x12, 034, 0x56, 0x78で埋める関数
+// ・メモリブロックのnバイト目のバイトデータを得る関数(底は0)
+// ・メモリブロックのチェックサムを計算する関数
+Test(execise, 19) {
+	unsigned char *dataBlock = (unsigned char *)calloc(4, sizeof(unsigned char));
+	
+	setMemoryBlock( dataBlock );
+	cr_assert(getByteMemory( dataBlock, 2 ) == 0x56);
+	cr_assert(checkSum( dataBlock, 4 ) == 0x14);
+
+	free( dataBlock );
 }

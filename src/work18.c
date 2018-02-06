@@ -1,6 +1,5 @@
 #include "common_work.h"
 
-#include <stdio.h>
 #include <string.h>
 
 int strlaststr(char *strSrc, char *strMatch)
@@ -10,6 +9,7 @@ int strlaststr(char *strSrc, char *strMatch)
 #ifdef _ANSWER_
 	char *findStr = strSrc; // 探索ポイント
 	int matchSize = strlen( strMatch );
+
 	while(1){
 		findStr = strstr( findStr, strMatch );
 		if( findStr == NULL ){ // もう見つからなかったら終了
