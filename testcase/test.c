@@ -233,14 +233,56 @@ Test(execise, 18) {
 
 // 4バイト確保されているメモリブロックに対し、下記の操作を行う関数を作成せよ(work19)
 // ・メモリブロックの先頭から１バイトずつ、0x12, 034, 0x56, 0x78で埋める関数
-// ・メモリブロックのnバイト目のバイトデータを得る関数(底は0)
+// ・メモリブロックの先頭からbyteIndexバイト先のデータを読み出す関数(要:オーバーフロー検知)
 // ・メモリブロックのチェックサムを計算する関数
 Test(execise, 19) {
-	unsigned char *dataBlock = (unsigned char *)calloc(4, sizeof(unsigned char));
-	
-	setMemoryBlock( dataBlock );
-	cr_assert(getByteMemory( dataBlock, 2 ) == 0x56);
-	cr_assert(checkSum( dataBlock, 4 ) == 0x14);
+	const int dataSize = 4;
+	unsigned char *memoryBlock = (unsigned char *)calloc(dataSize, sizeof(unsigned char));
+	char data[] = { 0x12, 0x34, 0x56, 0x78 };
 
-	free( dataBlock );
+	setMemoryBlock( memoryBlock, data, dataSize );
+	cr_assert(getByteMemory( memoryBlock, 2 ) == 0x56);
+	cr_assert(checkSum( memoryBlock, dataSize ) == 0x14);
+
+	free( memoryBlock );
+}
+
+// 与えられた文字列をアッパーキャメルに変換する関数(work20)
+Test(execise, 20) {
+	char str1[] = "abc";
+	char str2[] = "a";
+	char str3[] = "";
+
+	convUpperCamel(str1);
+	cr_assert(strcmp(str1, "Abc") == 0);
+	convUpperCamel(str2);
+	cr_assert(strcmp(str2, "A") == 0);
+	convUpperCamel(str3);
+	cr_assert(strcmp(str3, "") == 0);
+}
+
+// 下記構造体の要素ごとの総和を算出したデータを返す関数を作成せよ(work21)
+Test(execise, 21) {
+	PlayerParam param[] = {
+		{1, 2, 3},
+		{2, 1, 1},
+		{0, 1, 7},
+		{9, 3, 1},
+		{2, 3, 1},
+	};
+	PlayerParam sumParam;
+
+	int size = sizeof(param)/sizeof(PlayerParam);
+	sumParam = sumPlayerParam(param, size);
+	cr_assert(sumParam.win  == 14);
+	cr_assert(sumParam.lose == 10);
+	cr_assert(sumParam.draw == 13);
+}
+
+// 与えられた数字の2の補数を求める関数を作成せよ(work22)
+Test(execise, 22) {
+	cr_assert(complement2(5) == -5);
+	cr_assert(complement2(7) == -7);
+	cr_assert(complement2(0) == 0);
+	cr_assert(complement2(-1) == 1);
 }

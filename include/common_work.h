@@ -116,10 +116,26 @@ unsigned char rotateRight(unsigned char val);
  */
 int strlaststr(char *strSrc, char *strMatch);
 
-/* ### 4バイト確保されているメモリブロックに対し、下記の操作を行う関数を作成せよ(work19) ###
+/* ### dataSizeバイト確保されているメモリブロックに対し、下記の操作を行う関数を作成せよ(work19) ###
  * ・メモリブロックの先頭から１バイトずつ、0x12, 034, 0x56, 0x78で埋める関数
+ * ・メモリブロックの先頭からbyteIndexバイト先のデータを読み出す関数
  * ・メモリブロックのチェックサムを計算する関数
  */
-void setMemoryBlock( unsigned char *dataBlock );
-unsigned char getByteMemory( unsigned char *dataBlock, int byteIndex );
-unsigned char checkSum( unsigned char *dataBlock, int num );
+void setMemoryBlock( unsigned char *memoryBlock, unsigned char *data, int dataSize );
+unsigned char getByteMemory( unsigned char *memoryBlock, int byteIndex );
+unsigned char checkSum( unsigned char *memoryBlock, int num );
+
+/* ### 与えられた文字列をアッパーキャメルに変換する関数(work20) ### */
+void convUpperCamel(char *str);
+
+/* ### 下記構造体の要素ごとの総和を算出したデータを返す関数を作成せよ(work21) ### */
+typedef struct playerParam{
+	int win;
+	int lose;
+	int draw;
+} PlayerParam;
+
+PlayerParam sumPlayerParam(PlayerParam *data, int dataNum);
+
+/* ### 与えられた数字の2の補数を求める関数を作成せよ(work22) ### */
+int complement2( int data );
