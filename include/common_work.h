@@ -137,5 +137,18 @@ typedef struct playerParam{
 
 PlayerParam sumPlayerParam(PlayerParam *data, int dataNum);
 
-/* ### 与えられた数字の2の補数を求める関数を作成せよ(work22) ### */
+/* ### 与えられた数字の2の補数を求める関数を作成・利用して、aからbを引く関数を作成せよ(work22) ### */
 int complement2( int data );
+int subUsedcomplement2(int a, int b);
+
+/* ### 第1引数のポインタのポインタに対して、下記の処理を行う関数を作成せよ(work23) ###  
+ * ・先頭要素(第1要素)のポインタをNULLにする
+ * ・第2要素に第2引数のポインタを格納せよ。
+ */
+void changePtrPtr(int **pPtr, int *p);
+
+/* ### 既存の「奇数を判定する関数」を用いて、与えられた２値間の奇数の個数を求める関数を作成せよ(work24) ### */
+int checkOdd(int startNum, int endNum, int (*func)(int num));
+
+/* ### 配列の指定された要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
+int *searchItem( int vec[], int vecSize, int matchNumber );

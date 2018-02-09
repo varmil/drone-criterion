@@ -279,10 +279,66 @@ Test(execise, 21) {
 	cr_assert(sumParam.draw == 13);
 }
 
-// 与えられた数字の2の補数を求める関数を作成せよ(work22)
+// 与えられた数字の2の補数を求める関数を作成・利用して、aからbを引く関数を作成せよ(work22)
 Test(execise, 22) {
 	cr_assert(complement2(5) == -5);
 	cr_assert(complement2(7) == -7);
 	cr_assert(complement2(0) == 0);
 	cr_assert(complement2(-1) == 1);
+
+	cr_assert(subUsedcomplement2(8, 2) == 6);
+	cr_assert(subUsedcomplement2(5, -3) == 8);
+	cr_assert(subUsedcomplement2(2, 5) == -3);
+}
+
+/* ### 第１引数のポインタのポインタに対して、下記の処理をせよ(work23) ###  
+ * ・先頭要素(第1要素)のポインタをNULLにする
+ * ・代わりに第2要素に関数の第２引数のポインタを格納せよ。
+ */
+Test(execise, 23) {
+	int testData = 999;
+	int *p = &testData;
+	int *pPtr[] = {p, NULL, NULL};
+
+	changePtrPtr(pPtr, p);
+	cr_assert(pPtr[0] == NULL);	
+	cr_assert(pPtr[1] != NULL);
+	cr_assert(*pPtr[1] == 999);
+}
+
+/* ### 既存の「奇数を判定する関数」を用いて、与えられた２値間の奇数の個数を求める関数を作成せよ(work24) ### */
+// 奇数を判定する関数。奇数なら1を、偶数なら0を返す
+static int isOddNum(int num)
+{
+	int result = 0;
+
+	if( num % 2 ){
+		result = 1;
+	}
+	return( result ) ;
+}
+
+Test(execise, 24) {
+	int (*func)(int num);
+
+	func = isOddNum;
+
+	cr_assert( checkOdd(0, 1, isOddNum) == 1);	
+	cr_assert( checkOdd(0, 2, isOddNum) == 1);	
+	cr_assert( checkOdd(0, 3, isOddNum) == 2);	
+}
+
+/* ### 配列の指定された要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
+Test(execise, 25) {
+	int numVec[] = { 23, 4, 2, 11, 8, 99, 0 };
+	int numVecSize = sizeof(numVec)/sizeof(int);
+	int *p;
+
+	p = searchItem(numVec, numVecSize, 99);
+	cr_assert( p != NULL);
+	cr_assert( p-numVec == 5);
+	cr_assert( *p == 99);
+
+	p = searchItem(numVec, numVecSize, 22);
+	cr_assert( p == NULL);
 }

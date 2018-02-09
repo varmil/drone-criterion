@@ -10,3 +10,13 @@ int complement2( int data )
 #endif
 	return(result);
 }
+
+int subUsedcomplement2(int a, int b)
+{
+	int result = 0;
+
+#ifdef _ANSWER_
+	result = a + complement2(b);
+#endif
+	return(result);
+}
