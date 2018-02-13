@@ -141,9 +141,9 @@ PlayerParam sumPlayerParam(PlayerParam *data, int dataNum);
 int complement2( int data );
 int subUsedcomplement2(int a, int b);
 
-/* ### 第1引数のポインタのポインタに対して、下記の処理を行う関数を作成せよ(work23) ###  
+/* ### 第１引数のポインタのポインタに対して、下記の処理をする関数を作成せよ(work23) ###  
  * ・先頭要素(第1要素)のポインタをNULLにする
- * ・第2要素に第2引数のポインタを格納せよ。
+ * ・代わりに第2要素に関数の第２引数のポインタを格納する
  */
 void changePtrPtr(int **pPtr, int *p);
 
@@ -152,3 +152,10 @@ int checkOdd(int startNum, int endNum, int (*func)(int num));
 
 /* ### 配列の指定された要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
 int *searchItem( int vec[], int vecSize, int matchNumber );
+
+/* ### 下記２値乗算ができるように、void *を引数とするmulVoidPtr関数の実装をしなさい(work26) ### */
+double mulVoidPtr( void *a, void *b );
+
+//
+double cubeFunc(double num);
+

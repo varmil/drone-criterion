@@ -291,9 +291,9 @@ Test(execise, 22) {
 	cr_assert(subUsedcomplement2(2, 5) == -3);
 }
 
-/* ### 第１引数のポインタのポインタに対して、下記の処理をせよ(work23) ###  
+/* ### 第１引数のポインタのポインタに対して、下記の処理をする関数を作成せよ(work23) ###  
  * ・先頭要素(第1要素)のポインタをNULLにする
- * ・代わりに第2要素に関数の第２引数のポインタを格納せよ。
+ * ・代わりに第2要素に関数の第２引数のポインタを格納する
  */
 Test(execise, 23) {
 	int testData = 999;
@@ -301,7 +301,9 @@ Test(execise, 23) {
 	int *pPtr[] = {p, NULL, NULL};
 
 	changePtrPtr(pPtr, p);
-	cr_assert(pPtr[0] == NULL);	
+
+	// pPtr[] = {NULL, p, NULL};
+	cr_assert(pPtr[0] == NULL); 	
 	cr_assert(pPtr[1] != NULL);
 	cr_assert(*pPtr[1] == 999);
 }
@@ -341,4 +343,22 @@ Test(execise, 25) {
 
 	p = searchItem(numVec, numVecSize, 22);
 	cr_assert( p == NULL);
+}
+
+/* ### 下記２値乗算ができるように、void *を引数とするmulVoidPtr関数の実装をしなさい(work26) ### */
+Test(execise, 26) {
+	double a = 2.5;
+	int b = 4;
+
+	cr_assert( mulVoidPtr(&a, &b) == 10.0 );
+}
+
+/* ### 下記関数をつかって数学ライブラリを用いずに3乘を求める関数を作成せよ。(work27) ### */
+double cubeDouble( double num )
+{
+	return( num * num * num );
+}
+
+Test(execise, 27) {
+	cr_assert( cubeFunc(2.5) == 15.625 );
 }
