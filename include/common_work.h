@@ -156,6 +156,15 @@ int *searchItem( int vec[], int vecSize, int matchNumber );
 /* ### 下記２値乗算ができるように、void *を引数とするmulVoidPtr関数の実装をしなさい(work26) ### */
 double mulVoidPtr( void *a, void *b );
 
-//
+/* ### 下記関数をつかって数学ライブラリを用いずに3乘を求める関数を作成せよ。(work27) ### */
 double cubeFunc(double num);
 
+/* ### 文字列の長さを返す関数を作成せよ。ただしNULLの場合は0を返すようにすること(work28) ### */
+int getLength(const char *string);
+
+/* ### 10バイトのメモリを確保し0x11で埋めよ。さらに先頭3バイトを0x55で埋めよ(work29) ### */
+unsigned char *allocBlock(int blockSize, unsigned char fillData);
+void fillBlock(unsigned char* memBlock, int startFillByte, int endFillByte, unsigned char fillData);
+
+/* ### エンディアンを調べる関数を作成せよ。ただし処理系によるint幅に依存しないこと(work30) ### */
+int isBigEndian(void);

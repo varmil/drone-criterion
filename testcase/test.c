@@ -362,3 +362,32 @@ double cubeDouble( double num )
 Test(execise, 27) {
 	cr_assert( cubeFunc(2.5) == 15.625 );
 }
+
+/* ### 文字列の長さを返す関数を作成せよ。ただしNULLの場合は0を返すようにすること(work28) ### */
+Test(execise, 28) {
+	cr_assert( getLength("abc") == 3 );
+	cr_assert( getLength("") == 0 );
+	cr_assert( getLength(NULL) == 0 );
+}
+
+/* ### 10バイトのメモリを確保し0x11で埋めよ。さらに先頭3バイト目から5バイト目までを0x55で埋めよ(work29) ### */
+Test(execise, 29) {
+	unsigned char *memBlock = allocBlock(10, 0x11);
+
+	cr_assert( memBlock != NULL );
+
+	fillBlock(memBlock, 3, 5, 0x55);
+	cr_assert( *(memBlock+0) == 0x11 );
+	cr_assert( *(memBlock+1) == 0x11 );
+	cr_assert( *(memBlock+2) == 0x55 );
+	cr_assert( *(memBlock+3) == 0x55 );
+	cr_assert( *(memBlock+4) == 0x55 );
+	cr_assert( *(memBlock+5) == 0x11 );
+
+	free(memBlock);
+}
+
+/* ### エンディアンを調べる関数を作成せよ。ただし処理系によるint幅に依存しないこと(work30) ### */
+Test(execise, 30) {
+	cr_assert( isBigEndian() == 0 );
+}
