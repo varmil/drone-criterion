@@ -2,11 +2,22 @@
 
 #include<stdio.h>
 
-int getIntByteSize(void)
+TypeSize getTypeSize(void)
 {
-	int size = 0;
+	TypeSize ts;
+
 #ifdef _ANSWER_
-	size = sizeof(int);
+	ts.charSize = sizeof(char);
+	ts.charPtrSize = sizeof(char*);
+	ts.intSize = sizeof(int);
+	ts.intPtrSize = sizeof(int*);
+	ts.longSize = sizeof(long);
+	ts.floatSize = sizeof(float);
+	ts.floatPtrSize = sizeof(float*);
+	ts.doubleSize = sizeof(double);
+	ts.doublePtrSize = sizeof(double*);
+	ts.thisStructPtrSize = sizeof(TypeSize*);
+	ts.thisStructSize = sizeof(TypeSize);
 #endif
-	return(size);
+	return(ts);
 }

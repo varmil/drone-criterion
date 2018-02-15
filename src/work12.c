@@ -1,11 +1,25 @@
 #include "common_work.h"
-
-int myRound(double num)
-{
-	int result = 0;
+#include <stdio.h>
 
 #ifdef _ANSWER_
-	result =  (int)( num < 0.0 ? num-0.5 : num+0.5 );
+static int result;
 #endif
-	return result;
+
+void resetCount(double iniVal)
+{
+#ifdef _ANSWER_
+	result = (int)(iniVal * 10);
+#endif
+}
+
+double countDown(void)
+{
+#ifdef _ANSWER_
+	result -= 1;
+	
+	return result/10.0f;
+#else
+	return(0.0f);
+#endif
+
 }

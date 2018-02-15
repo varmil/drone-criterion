@@ -5,56 +5,59 @@
 
 #include "common_work.h"
 
-// 整数値aとbの値をスワップさせるswap関数を作成せよ。(work01)
+/* ### 整数値aとbの値をスワップさせるswap関数を作成せよ。(work01) ### */
 Test(execise, 1) {
-	int a = 10, b = 20;
+	int a, b;
 
-#ifdef _ANSWER_
-	swap( &a, &b );
-#else
-	swap();
-#endif        
+	a = 10; b = 20;
+	change( &a, &b );
+	cr_assert(a == 20);
+	cr_assert(b == 10);
 
-	cr_assert(a == 20, "swap error a");
-	cr_assert(b == 10, "swap error b");
+	a = 27; b = 9;
+	change( &a, &b );
+	cr_assert(a == 9);
+	cr_assert(b == 27);
 }
 
-// strcpyを使わずに文字列をコピーする関数my_strcpyを作成せよ。(work02)
+/* ### 小文字を大文字に変換しつつ、文字列をコピーする関数my_strcpyを作成せよ。ただし標準関数は使用しないこと。(work02)　### */
 Test(execise, 2) {
 	char dstStr[] = "";
     
-	my_strcpy(dstStr, "PHP");
+	my_strcpy(dstStr, "Php");
+	cr_assert(strcmp(dstStr, "PHP") == 0);
 
-	cr_assert(strcmp(dstStr, "PHP") == 0, "dstStr copy fatal");
+	my_strcpy(dstStr, "JavaScript");
+	cr_assert(strcmp(dstStr, "JAVASCRIPT") == 0);
 }
 
-// 整数値を文字列に変換する関数int_to_strを作成せよ。(work03)
+/* ### 整数値を文字列に変換する関数int_to_strを作成せよ。(work03) ### */
 Test(execise, 3) {
-	cr_assert(int_to_str(100)!=NULL, "string NULL error");
-	cr_assert(strcmp(int_to_str(100), "100") == 0, "string convert error");
-	cr_assert(strcmp(int_to_str(-555), "-555") == 0, "string convert error");
+	cr_assert(int_to_str(100) != NULL);
+	cr_assert(strcmp(int_to_str(100), "100") == 0);
+	cr_assert(strcmp(int_to_str(-550045), "-550045") == 0);
 }
 
-// サンプルデータを価格順にソートする関数を作成せよ。(work04)
+/* ### 下記データを価格の高い順にソートする関数を作成せよ。(work04) ### */
 Test(execise, 4) {
-	Choco list[] =
-		{ { 5200, "アーモンド", 1000 }, { 3010, "ラムレーズン", 840 }
-		, { 2020, "ビター", 525 }, { 3020, "クランチ", 720 }
-		, { 2030, "ホワイト", 500 }, { 2010, "ミルク", 450 }
-		, { 5050, "マカダミア", 1200 } };
+	Juice list[] =
+		{ { 5200, "オレンジ", 1000 }, { 3010, "アップル", 840 }
+		, { 2020, "パイナップル", 525 }, { 3020, "グレープ", 720 }
+		, { 2030, "レモン", 500 }, { 2010, "トマト", 450 }
+		, { 5050, "ドリアン", 1200 } };
 
-	sortPrice( list, sizeof(list)/sizeof(Choco) );
+	sortPrice( list, sizeof(list)/sizeof(Juice) );
 
-	cr_assert(strcmp(list[0].name, "マカダミア") == 0, "list0 error");
-	cr_assert(strcmp(list[1].name, "アーモンド") == 0, "list1 error");
-	cr_assert(strcmp(list[2].name, "ラムレーズン") == 0, "list2 error");
-	cr_assert(strcmp(list[3].name, "クランチ") == 0, "list3 error");
-	cr_assert(strcmp(list[4].name, "ビター") == 0, "list4 error");
-	cr_assert(strcmp(list[5].name, "ホワイト") == 0, "list5 error");
-	cr_assert(strcmp(list[6].name, "ミルク") == 0, "list6 error");
+	cr_assert(strcmp(list[0].name, "ドリアン") == 0);
+	cr_assert(strcmp(list[1].name, "オレンジ") == 0);
+	cr_assert(strcmp(list[2].name, "アップル") == 0);
+	cr_assert(strcmp(list[3].name, "グレープ") == 0);
+	cr_assert(strcmp(list[4].name, "パイナップル") == 0);
+	cr_assert(strcmp(list[5].name, "レモン") == 0);
+	cr_assert(strcmp(list[6].name, "トマト") == 0);
 }
 
-// 名前とインデックス番号をリストに登録していき、一括表示。最後にリスト情報を解放する。(work05)
+/* ### 任意の人物たちの「名前」と「年齢」と次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### */
 Test(execise, 5) {
 	MemberList *head = NULL; /* 先頭ポインタ */
 	char *name[] = {
@@ -67,20 +70,17 @@ Test(execise, 5) {
 		head = add_list(indexNo, name[indexNo], head);
 	}
 
-	/* リストの一括表示 */
-	show_list(head);
-
 	MemberList *p = head;
-	cr_assert(strcmp(p->name, "ashihara") == 0, "list0 error"); p = p->next;
-	cr_assert(strcmp(p->name, "matsuo")   == 0, "list1 error"); p = p->next;
-	cr_assert(strcmp(p->name, "yamamoto") == 0, "list2 error"); p = p->next;
-	cr_assert(strcmp(p->name, "kuwata")   == 0, "list3 error");
+	cr_assert(strcmp(p->name, "ashihara") == 0); p = p->next;
+	cr_assert(strcmp(p->name, "matsuo")   == 0); p = p->next;
+	cr_assert(strcmp(p->name, "yamamoto") == 0); p = p->next;
+	cr_assert(strcmp(p->name, "kuwata")   == 0);
 
 	/* リストの開放 */
 	free_list(head);
 }
 
-// 下記ビット配置のARGB8888フォーマットにおけるGreen値を抽出せよ(work6)
+/* ### 下記ビット配置のARGB8888フォーマットにおけるGreen値を抽出せよ(work6) ### */
 #define ARGB8888(a,r,g,b)  ((unsigned int)((((a) & 0xff)<<24) | (((r) & 0xff)<<16) | (((g) & 0xff)<<8) | ((b) & 0xff)))
 
 Test(execise, 6) {
@@ -89,96 +89,131 @@ Test(execise, 6) {
 
 	colorG = PickupGreen(argbColor);
 
-	cr_assert(colorG == 0x56, "color unmatching");
+	cr_assert(colorG == 0x56);
 }
 
-// カンマ区切りの文字列データのn番目の要素を取り出せ(work7)
+/* ### カンマ区切りの文字列データのn番目の要素(文字列)を取り出す関数を作成せよ(work7) ### */
 Test(execise, 7) {
 	const char csvData[]="SQL,C,PHP,JavaScript,Linux,HTML,bash";
 
 	char *copyStr = (char *)malloc(sizeof(csvData));
 	strcpy(copyStr, csvData);
-	cr_assert(strcmp(getItemCSV(copyStr, 0), "SQL") == 0, "SQL parse error");
+	cr_assert(strcmp(getItemCSV(copyStr, 0), "SQL") == 0);
 	strcpy(copyStr, csvData);
-	cr_assert(strcmp(getItemCSV(copyStr, 5), "HTML") == 0, "HTML parse error");
+	cr_assert(strcmp(getItemCSV(copyStr, 5), "HTML") == 0);
 
 	free(copyStr);
 }
 
-// 曜日を示す文字列へのポインタを返す関数を作成せよ(work8)
-// ただし日曜日を0とし、土曜日を6とする
+/* ### 曜日を示す文字列へのポインタを返す関数を作成せよ(work8) ### 
+ * ただし日曜日を0とし、土曜日を6とするパラメータを渡すとする。
+ */
 Test(execise, 8) {
-	cr_assert(strcmp(strweek(0), "Sunday") == 0, "週初め取得できず");
-	cr_assert(strcmp(strweek(6), "Saturday") == 0, "週末取得できず");
+	cr_assert(strcmp(strweek(0), "Sunday") == 0);
+	cr_assert(strcmp(strweek(6), "Saturday") == 0);
 }
 
-// 呼ぶたびにパターンが点滅する関数を作成せよ(work9)
+/* ### 32ビットデータ列のnビット目からmビット目までを抽出する関数を作成せよ。ただしn<=mであり、LSB=0ビット目とする(work9) ### */
 Test(execise, 9) {
-	unsigned int basePattern = 0xabcd;
-
-	cr_assert(blinkPattern(basePattern) == 0xabcd, "初回点灯 NG");
-	cr_assert(blinkPattern(basePattern) == 0x0, "消灯 NG");
-	cr_assert(blinkPattern(basePattern) == 0xabcd, "再点灯 NG");
+	cr_assert(getSubBit(0x12345678, 0, 0) == 0x0);
+	cr_assert(getSubBit(0x12345678, 3, 3) == 0x1);
+	cr_assert(getSubBit(0x12345678, 4, 7) == 0x7);
+	cr_assert(getSubBit(0x12345678, 24, 31) == 0x12);
+	cr_assert(getSubBit(0x12345678, 0, 31) == 0x12345678);
 }
 
-// 処理系ごとにint型のサイズが異なる。
-// このシステムのint型のサイズを調べる関数を作成せよ(work10)
+/* ### このシステムにおける各種型サイズを調べ、結果を構造体で返す関数を作成せよ(work10) ### */
 Test(execise, 10) {
-	cr_assert(getIntByteSize() == 4, "size mistake");
+	TypeSize ts = getTypeSize();
+
+	cr_assert(ts.charSize == 1);
+	cr_assert(ts.charPtrSize == 8);
+	cr_assert(ts.intSize == 4);
+	cr_assert(ts.intPtrSize == 8);
+	cr_assert(ts.longSize == 8);
+	cr_assert(ts.floatSize == 4);
+	cr_assert(ts.floatPtrSize == 8);
+	cr_assert(ts.doubleSize == 8);
+	cr_assert(ts.doublePtrSize == 8);
+	cr_assert(ts.thisStructPtrSize == 8);
+	cr_assert(ts.thisStructSize == 44);
 }
 
-// data1の下位8bitを上位8bitとし、data2の上位8bitを下位8bitとしたビット列を
-// 反転した値を表示する関数を作成せよ(work11)
+/* ### 下記の方法で生成した16bitデータを返す関数を作成せよ(work11) ### 
+ * 1. 16bitデータであるdata1の下位8bitを上位8bitとし、かつ同じく16bitデータであるdata2の上位8bitを下位8bitとする、新規16bitデータを生成する
+ * 2. 1.で生成した16bitデータを反転する。
+ * 3. 結果は下位16bitだけ返すこと */
 Test(execise, 11) {
-	cr_assert(make16BitData(0xabcd, 0x1234) == 0x32ed, "bitdata mistake");
+	cr_assert(make16BitReverseData(0xabcd, 0x1234) == 0x32ed);
+	cr_assert(make16BitReverseData(0x00ff, 0xff00) == 0x0000);
+	cr_assert(make16BitReverseData(0xff00, 0x00ff) == 0xffff);
 }
 
- // 小数点以下を四捨五入する関数を自作せよ(work12)
+ // 小数点以下を四捨五入ならぬ七捨八入する関数を自作せよ(work12)
 Test(execise, 12) {
-	cr_assert(myRound(5.4) == 5, "切り下げ error");
-	cr_assert(myRound(5.5) == 6, "切り上げ error");
+	resetCount(1.0f);
+
+	cr_assert(countDown() == 0.9f);
+	cr_assert(countDown() == 0.8f);
+	cr_assert(countDown() == 0.7f);
+	cr_assert(countDown() == 0.6f);
+	cr_assert(countDown() == 0.5f);
+	cr_assert(countDown() == 0.4f);
+	cr_assert(countDown() == 0.3f);
+	cr_assert(countDown() == 0.2f);
+	cr_assert(countDown() == 0.1f);
+	cr_assert(countDown() == 0.0f);
 }
 
-// 任意の数のポインターの配列を使って、それぞれに1バイト領域を割り当て、要素を0xbeで埋めたのち、解放せよ(work13)
+/* ### 任意の数のポインターの配列を使って、それぞれに1バイト領域を割り当て、要素をtestByteで埋めたのち、解放せよ(work13) ### */
 #define ARRAY_NUM   3
 
 Test(execise, 13) {
-
 	unsigned char *p[ARRAY_NUM] = { NULL, NULL, NULL };
+	unsigned char testByte = 0xbe;
 
-	allocMyArray( p, ARRAY_NUM, 0xbe );
+	allocMyArray( p, ARRAY_NUM, testByte );
 
-	cr_assert(p[0] != NULL, "p0 null");
-	cr_assert(p[1] != NULL, "p1 null");
-	cr_assert(p[2] != NULL, "p2 null");
+	cr_assert(p[0] != NULL);
+	cr_assert(p[1] != NULL);
+	cr_assert(p[2] != NULL);
 
-	cr_assert(*p[0] == 0xbe, "p0 value set error");
-	cr_assert(*p[1] == 0xbe, "p1 value set error");
-	cr_assert(*p[2] == 0xbe, "p2 value set error");
+	cr_assert(*p[0] == testByte);
+	cr_assert(*p[1] == testByte);
+	cr_assert(*p[2] == testByte);
 
 	freeMyArray(p, ARRAY_NUM);
 }
 
-// 下記の演算関数を作成せよ(work14)
+/* ### 各種演算関数を作成せよ(work14) ### 
+ * ・バイトデータを反転した値を得る関数
+ * ・２つのバイトデータの排他的論理和を得る関数
+ * ・任意のバイトデータを任意のバイトデータでビットマスクする関数
+ * ・任意のバイトデータの任意のバイトデータのビットで強制的に有効にする関数
+ */
 Test(execise, 14) {
 	unsigned char a = 0xc5;
 	unsigned char b = 0x96;
 
-	cr_assert(calcReverse(a)        == 0x3a, "reverse error");  // 反転
-	cr_assert(calcXOR(a, b)         == 0x53, "xor error");      // 排他的論理和
-	cr_assert(calcBitMask(a, b)     == 0x84, "mask error");     // ビットマスク
-	cr_assert(calcBitEnable(a, b)   == 0xd7, "eneble error");   // 特定ビットを常に有効にする
+	cr_assert(calcReverse(a)        == 0x3a); // 反転
+	cr_assert(calcXOR(a, b)         == 0x53); // 排他的論理和
+	cr_assert(calcBitMask(a, b)     == 0x84); // ビットマスク
+	cr_assert(calcBitEnable(a, b)   == 0xd7); // 特定ビットを常に有効にする
 }
 
-// 文字列から任意の文字が初めて出現する位置を求める関数を作成せよ(work15)
+/* ### 文字列から任意の文字が初めて出現する位置を求める関数を作成せよ(work15) ### */
 Test(execise, 15) {
 	char testStr[] = "abcdefghijklmnopqrstuvwxyz";
 
-	cr_assert(searchChar(testStr, 'd') == 3, "d index error");  // d
-	cr_assert(searchChar(testStr, '@') == -1, "@ index error");  // 不正文字
+	cr_assert(searchChar(testStr, 'd') == 3);  // d
+	cr_assert(searchChar(testStr, '@') == -1);  // 不正文字
 }
 
-// 当該データ構造における各種関数を作成せよ(work16)
+/* ### 下記データ構造における各関数を作成せよ(work16) ### 
+ * ・全生徒の科目別の平均点を得る関数
+ * ・全生徒、全科目の平均点を得る関数
+ * ・生徒名から、その生徒の成績データ全体(grade構造体へのポインタ)を得る関数
+ */
 Test(execise, 16) {
 	Student students[]={
 		{ "yamamoto",{100,100,100,100 } },
@@ -187,41 +222,43 @@ Test(execise, 16) {
 	};
 
 	int num = sizeof(students)/sizeof(Student);
-	cr_assert(calcSubjectAverage(students, num, JAPANESE) == 62, "Japanese average error");
-	cr_assert(calcAllAverage(students, num) == 56, "all average error");
+	cr_assert(calcSubjectAverage(students, num, JAPANESE) == 62);
+	cr_assert(calcAllAverage(students, num) == 56);
 	Grade *grade = getGrade(students, num, "kuwata");
-	cr_assert(grade != NULL, "grade not null");
+	cr_assert(grade != NULL);
 //	if( grade ){
-		cr_assert(grade->subjects[ENGLISH] == 10, "kuwata\'s English error");
+		cr_assert(grade->subjects[ENGLISH] == 10);
 //	}
 }
 
-// キャリーなし左右ローテート関数を作り、ビットパターンが1ビットずつ移動するアニメーションを作成せよ(work17)  
-// ただし、処理系が算術シフト、論理シフトいずれを採用していても結果が変わらないように注意せよ
+/* ### キャリーなし左右ローテート関数を作り、ビットパターンが1ビットずつ移動するアニメーションを作成せよ(work17) ### 
+ * ただし、処理系が算術シフト、論理シフトいずれを採用していても結果が変わらないように注意せよ
+ */
 Test(execise, 17) {
 	unsigned char data;
 
 	// ビットパターン左移動
 	data = 0x81;
 	data = rotateLeft(data);
-	cr_assert(data == 0x03, "RotateLeft1 error");
+	cr_assert(data == 0x03);
 	data = rotateLeft(data);
-	cr_assert(data == 0x06, "RotateLeft2 error");
+	cr_assert(data == 0x06);
 	data = rotateLeft(data);
-	cr_assert(data == 0x0c, "RotateLeft3 error");
+	cr_assert(data == 0x0c);
 
 	// ビットパターン右移動
 	data = 0x81;
 	data = rotateRight(data);
-	cr_assert(data == 0xc0, "RotateRight1 error");
+	cr_assert(data == 0xc0);
 	data = rotateRight(data);
-	cr_assert(data == 0x60, "RotateRight2 error");
+	cr_assert(data == 0x60);
 	data = rotateRight(data);
-	cr_assert(data == 0x30, "RotateRight3 error");
+	cr_assert(data == 0x30);
 }
 
-// 文字列strSrcの中から文字列strMatcを探し、その最後にみつけた位置を返す関数を作成する。(work18) 
-// ・見つからなかったら-1を返すこと。strstr関数を使用して良い
+/* ### 文字列strSrcの中から文字列strMatcを探し、その最後にみつけた位置を返す関数を作成する。(work18) ###
+ * ・見つからなかったら-1を返すこと。strstr関数を使用して良い
+ */
 Test(execise, 18) {
 	char *strSrc1 = "abcdefdefdef"; // 探索文字列その1
 	char *strSrc2 = "a"; // 探索文字列その2
@@ -231,23 +268,24 @@ Test(execise, 18) {
 	cr_assert(strlaststr(strSrc2, strMatch) == -1);
 }
 
-// 4バイト確保されているメモリブロックに対し、下記の操作を行う関数を作成せよ(work19)
-// ・メモリブロックの先頭から１バイトずつ、0x12, 034, 0x56, 0x78で埋める関数
-// ・メモリブロックの先頭からbyteIndexバイト先のデータを読み出す関数(要:オーバーフロー検知)
-// ・メモリブロックのチェックサムを計算する関数
+/* ### dataSizeバイト確保されているメモリブロックに対し、下記の操作を行う関数を作成せよ(work19) ###
+ * ・メモリブロックの先頭から１バイトずつ、0x12, 034, 0x56, 0x78で埋める関数
+ * ・メモリブロックの先頭からbyteIndexバイト先のデータを読み出す関数
+ * ・メモリブロックのチェックサムを計算する関数
+ */
 Test(execise, 19) {
 	const int dataSize = 4;
 	unsigned char *memoryBlock = (unsigned char *)calloc(dataSize, sizeof(unsigned char));
 	char data[] = { 0x12, 0x34, 0x56, 0x78 };
 
-	setMemoryBlock( memoryBlock, data, dataSize );
-	cr_assert(getByteMemory( memoryBlock, 2 ) == 0x56);
-	cr_assert(checkSum( memoryBlock, dataSize ) == 0x14);
+	setMemoryBlock(memoryBlock, data, dataSize);
+	cr_assert(getByteMemory(memoryBlock, 2) == 0x56);
+	cr_assert(checkSum(memoryBlock, dataSize) == 0x14);
 
 	free( memoryBlock );
 }
 
-// 与えられた文字列をアッパーキャメルに変換する関数(work20)
+/* ### 与えられた文字列をアッパーキャメルに変換する関数(work20) ### */
 Test(execise, 20) {
 	char str1[] = "abc";
 	char str2[] = "a";
@@ -261,7 +299,7 @@ Test(execise, 20) {
 	cr_assert(strcmp(str3, "") == 0);
 }
 
-// 下記構造体の要素ごとの総和を算出したデータを返す関数を作成せよ(work21)
+/* ### 下記構造体の要素ごとの総和を算出したデータを返す関数を作成せよ(work21) ### */
 Test(execise, 21) {
 	PlayerParam param[] = {
 		{1, 2, 3},
@@ -279,7 +317,7 @@ Test(execise, 21) {
 	cr_assert(sumParam.draw == 13);
 }
 
-// 与えられた数字の2の補数を求める関数を作成・利用して、aからbを引く関数を作成せよ(work22)
+/* ### 与えられた数字の2の補数を求める関数を作成・利用して、aからbを引く関数を作成せよ(work22) ### */
 Test(execise, 22) {
 	cr_assert(complement2(5) == -5);
 	cr_assert(complement2(7) == -7);
@@ -317,7 +355,7 @@ static int isOddNum(int num)
 	if( num % 2 ){
 		result = 1;
 	}
-	return( result ) ;
+	return(result) ;
 }
 
 Test(execise, 24) {
@@ -325,9 +363,9 @@ Test(execise, 24) {
 
 	func = isOddNum;
 
-	cr_assert( checkOdd(0, 1, isOddNum) == 1);	
-	cr_assert( checkOdd(0, 2, isOddNum) == 1);	
-	cr_assert( checkOdd(0, 3, isOddNum) == 2);	
+	cr_assert(checkOdd(0, 1, isOddNum) == 1);	
+	cr_assert(checkOdd(0, 2, isOddNum) == 1);	
+	cr_assert(checkOdd(0, 3, isOddNum) == 2);	
 }
 
 /* ### 配列の指定された要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
@@ -337,12 +375,12 @@ Test(execise, 25) {
 	int *p;
 
 	p = searchItem(numVec, numVecSize, 99);
-	cr_assert( p != NULL);
-	cr_assert( p-numVec == 5);
-	cr_assert( *p == 99);
+	cr_assert(p != NULL);
+	cr_assert(p-numVec == 5);
+	cr_assert(*p == 99);
 
 	p = searchItem(numVec, numVecSize, 22);
-	cr_assert( p == NULL);
+	cr_assert(p == NULL);
 }
 
 /* ### 下記２値乗算ができるように、void *を引数とするmulVoidPtr関数の実装をしなさい(work26) ### */
@@ -350,44 +388,52 @@ Test(execise, 26) {
 	double a = 2.5;
 	int b = 4;
 
-	cr_assert( mulVoidPtr(&a, &b) == 10.0 );
+	cr_assert(mulVoidPtr(&a, &b) == 10.0);
 }
 
-/* ### 下記関数をつかって数学ライブラリを用いずに3乘を求める関数を作成せよ。(work27) ### */
-double cubeDouble( double num )
+/* ### 下記関数をつかって数学ライブラリを用いずに3乘を求める関数を作成せよ。ただし、小数点以下は四捨五入すること(work27) ### */
+double cubeDouble(double num)
 {
-	return( num * num * num );
+	return(num * num * num);
 }
 
 Test(execise, 27) {
-	cr_assert( cubeFunc(2.5) == 15.625 );
+	cr_assert(cubeFunc(2) == 8);
+	cr_assert(cubeFunc(5) == 125);
+	cr_assert(cubeFunc(2.5) == 16);
 }
 
-/* ### 文字列の長さを返す関数を作成せよ。ただしNULLの場合は0を返すようにすること(work28) ### */
+/* ### strlenを用いずに文字列の長さを返す関数を作成せよ。ただしNULLの場合は0を返すようにすること(work28) ### */
 Test(execise, 28) {
-	cr_assert( getLength("abc") == 3 );
-	cr_assert( getLength("") == 0 );
-	cr_assert( getLength(NULL) == 0 );
+	cr_assert(getLength("abc") == 3);
+	cr_assert(getLength("") == 0);
+	cr_assert(getLength(NULL) == 0);
 }
 
-/* ### 10バイトのメモリを確保し0x11で埋めよ。さらに先頭3バイト目から5バイト目までを0x55で埋めよ(work29) ### */
+/* ### blockSize分のメモリを確保しbasePatternで埋めよ。さらに先頭startByte目からendByte目までをsubPatternで埋めよ(work29) ### */
 Test(execise, 29) {
-	unsigned char *memBlock = allocBlock(10, 0x11);
+	unsigned char basePattern = 0x11;
+	int blockSize = 10;
+	unsigned char *memBlock = allocBlock(blockSize, basePattern);
 
-	cr_assert( memBlock != NULL );
+	cr_assert(memBlock != NULL);
 
-	fillBlock(memBlock, 3, 5, 0x55);
-	cr_assert( *(memBlock+0) == 0x11 );
-	cr_assert( *(memBlock+1) == 0x11 );
-	cr_assert( *(memBlock+2) == 0x55 );
-	cr_assert( *(memBlock+3) == 0x55 );
-	cr_assert( *(memBlock+4) == 0x55 );
-	cr_assert( *(memBlock+5) == 0x11 );
+	int startByte = 3;
+	int endByte = 5;
+	unsigned char subPattern = 0x55;
+
+	fillBlock(memBlock, startByte, endByte, subPattern);
+	cr_assert(*(memBlock+0) == basePattern);
+	cr_assert(*(memBlock+1) == basePattern);
+	cr_assert(*(memBlock+2) == subPattern);
+	cr_assert(*(memBlock+3) == subPattern);
+	cr_assert(*(memBlock+4) == subPattern);
+	cr_assert(*(memBlock+5) == basePattern);
 
 	free(memBlock);
 }
 
 /* ### エンディアンを調べる関数を作成せよ。ただし処理系によるint幅に依存しないこと(work30) ### */
 Test(execise, 30) {
-	cr_assert( isBigEndian() == 0 );
+	cr_assert(isBigEndian() == 0);
 }

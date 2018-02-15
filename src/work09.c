@@ -1,13 +1,20 @@
 #include "common_work.h"
+#include <stdio.h>
 
-unsigned int blinkPattern(unsigned int pattern)
+unsigned int getSubBit(unsigned int baseData, int n, int m)
 {
-	static unsigned int currentPattern = 0x0;
+	unsigned int result = 0x0;
 
 #ifdef _ANSWER_
-	currentPattern ^= pattern;
-#else
+	baseData >>= n;
 
-	return(currentPattern);
+	unsigned int mask = 0x1;
+	int i;
+	for( i = 0 ; i < m-n ; i++ ){
+		mask <<= 1;
+		mask |= 1;
+	}
+	result = baseData & mask;
 #endif
+	return(result);
 }

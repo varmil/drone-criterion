@@ -2,15 +2,18 @@
 
 #include<stdio.h>
 
-unsigned short make16BitData(unsigned short data1, unsigned short data2)
+unsigned int make16BitReverseData(unsigned int data1, unsigned int data2)
 {
-	unsigned short int newData = 0x0;
+	unsigned int newData = 0x0;
 
 #ifdef _ANSWER_
 	data1 <<= 8;
+	data1 &= 0xffff;
+	data2 &= 0xffff;
 	data2 >>= 8;
 	data1 |= data2;
 	newData = ~data1;
+	newData &= 0xffff;
 #endif
 	return(newData);
 }

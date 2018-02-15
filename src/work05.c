@@ -52,12 +52,12 @@ void free_list(MemberList *p)
 #endif
 }
 
-void show_list(MemberList *p)
-{
-#ifdef _ANSWER_
-	while (p != NULL) {	/* 次ポインタがNULLまで処理 */
-		printf("%3d %s\n", p->key, p->name);
-		p = p->next;
-	}
-#endif
-}
+// void show_list(MemberList *p)
+// {
+// #ifdef _ANSWER_
+// 	while (p != NULL) {	/* 次ポインタがNULLまで処理 */
+// 		printf("%3d %s\n", p->key, p->name);
+// 		p = p->next;
+// 	}
+// #endif
+// }

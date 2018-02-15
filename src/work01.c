@@ -1,9 +1,9 @@
 #include "common_work.h"
 
 #ifdef _ANSWER_
-void swap( int *a, int *b )
+void change(int *a, int *b )
 #else
-void swap( void )
+void change( void )
 #endif
 {
 #ifdef _ANSWER_
