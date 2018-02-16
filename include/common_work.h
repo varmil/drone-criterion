@@ -1,10 +1,10 @@
 #define _ANSWER_
 
-/* ### 整数値aとbの値をスワップさせるswap関数を作成せよ。(work01) ### */
+/* ### 整数値aとbの値を入れ替える関数を作成せよ。(work01) ### */
 void change();
 
 /* ### 小文字を大文字に変換しつつ、文字列をコピーする関数my_strcpyを作成せよ。ただし標準関数は使用しないこと。(work02)　### */
-void my_strcpy(char *dstStr, const char *srcStr);
+void my_strcpy();
 
 /* ### 整数値を文字列に変換する関数int_to_strを作成せよ。(work03) ### */
 char *int_to_str(int value);
@@ -19,19 +19,18 @@ typedef struct {
 
 void sortPrice( Juice *list, int n );
 
-/* ### 任意の人物たちの「名前」と「年齢」と次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### */
+/* ### 任意の人物の「名前」と「年齢」を次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### */
 typedef struct memberlist{
 	int key;				// キー
 	char name[NAMELEN];		// 名前 
 	struct memberlist *next;// 次のデータへのポインタ
 } MemberList;
 
-MemberList *add_list(int key, char *name, MemberList *head);
-void free_list(MemberList *p);
+MemberList *add_list(int key, char *name, MemberList *head); // メンバーをリストに登録する関数
+void free_list(MemberList *p); // リストを解放する関数
 
-/* ### 下記ビット配置のARGB8888フォーマットにおけるGreen値を抽出せよ(work6) ###
- * #define ARGB8888(a,r,g,b)  ((unsigned int)((((a) & 0xff)<<24) | (((r) & 0xff)<<16) | (((g) & 0xff)<<8) | ((b) & 0xff)))
- */
+/* ### 下記ビット配置のARGB8888フォーマットにおけるGreen値を抽出する関数を作成せよ(work6) ### */
+// #define ARGB8888(a,r,g,b)  ((unsigned int)((((a) & 0xff)<<24) | (((r) & 0xff)<<16) | (((g) & 0xff)<<8) | ((b) & 0xff)))
 unsigned int PickupGreen(unsigned int argb);
 
 /* ### カンマ区切りの文字列データのn番目の要素(文字列)を取り出す関数を作成せよ(work7) ### */
@@ -49,9 +48,12 @@ unsigned int getSubBit(unsigned int baseData, int n, int m);
 typedef struct typesize{
 	char charSize;		// char型のサイズ
 	int charPtrSize;	// char*型のサイズ
+	int shortSize;		// short int型のサイズ
+	int shortPtrSize;	// short*型のサイズ
 	int intSize;		// int型のサイズ
 	int intPtrSize;		// int*型のサイズ
-	int longSize;		// long型のサイズ
+	int longSize;		// long int型のサイズ
+	int longPtrSize;	// long*型のサイズ
 	int floatSize;		// float型のサイズ
 	int floatPtrSize;	// float*型のサイズ
 	int doubleSize;		// double型のサイズ
@@ -68,11 +70,11 @@ TypeSize getTypeSize(void);
  * 3. 結果は下位16bitだけ返すこと */
 unsigned int make16BitReverseData(unsigned int data1, unsigned int data2);
 
-/* ### 0.1刻みでカウントダウンする関数を作成せよ。(work12) ### */
+/* ### 0.1刻みでカウントダウンする関数を作成せよ。また初期値を設定する関数も作成すること(work12) ### */
 void resetCount(double iniVal); // 初期値設定
 double countDown(void); // 0.1刻みでカウントダウンする関数
 
-/* ### 任意の数のポインターの配列を使って、それぞれに1バイト領域を割り当て、要素をtestByteで埋めたのち、解放せよ(work13) ### */
+/* ### 任意の数のポインターの配列を使ってそれぞれに1バイト領域を割り当て、各要素をtestByteで埋めたのち、解放せよ(work13) ### */
 void allocMyArray(unsigned char **p, unsigned int num, unsigned short pattern); // 領域を割り当て、パターンで埋める
 void freeMyArray(unsigned char **p, unsigned int num); // 割り当てた領域を解放する
 
@@ -82,10 +84,10 @@ void freeMyArray(unsigned char **p, unsigned int num); // 割り当てた領域�
  * ・任意のバイトデータを任意のバイトデータでビットマスクする関数
  * ・任意のバイトデータの任意のバイトデータのビットで強制的に有効にする関数
  */
-unsigned char calcReverse(unsigned char val);
-unsigned char calcXOR(unsigned char a, unsigned char b);
-unsigned char calcBitMask(unsigned char a, unsigned char b);
-unsigned char calcBitEnable(unsigned char a, unsigned char b);
+unsigned char calcReverse(unsigned char val); // バイトデータを反転
+unsigned char calcXOR(unsigned char a, unsigned char b); // バイトデータ同士の排他的論理和
+unsigned char calcBitMask(unsigned char a, unsigned char b); // ビットマスク
+unsigned char calcBitEnable(unsigned char a, unsigned char b); // 任意のビットの有効化
 
 /* ### 文字列から任意の文字が初めて出現する位置を求める関数を作成せよ(work15) ### */
 int searchChar(unsigned char *str, unsigned char chara);
@@ -120,8 +122,8 @@ Grade *getGrade(Student *students, int num, char *studentName); // 任意の生�
 /* ### キャリーなし左右ローテート関数を作り、ビットパターンが1ビットずつ移動するアニメーションを作成せよ(work17) ### 
  * ただし、処理系が算術シフト、論理シフトいずれを採用していても結果が変わらないように注意せよ
  */
-unsigned char rotateLeft(unsigned char val);
-unsigned char rotateRight(unsigned char val);
+unsigned char rotateLeft(unsigned char val); // 左ローテート関数
+unsigned char rotateRight(unsigned char val); // 右ローテート関数
 
 /* ### 文字列strSrcの中から文字列strMatcを探し、その最後にみつけた位置を返す関数を作成する。(work18) ###
  * ・見つからなかったら-1を返すこと。strstr関数を使用して良い
@@ -129,13 +131,13 @@ unsigned char rotateRight(unsigned char val);
 int strlaststr(char *strSrc, char *strMatch);
 
 /* ### dataSizeバイト確保されているメモリブロックに対し、下記の操作を行う関数を作成せよ(work19) ###
- * ・メモリブロックの先頭から１バイトずつ、0x12, 034, 0x56, 0x78で埋める関数
+ * ・メモリブロックの先頭から１バイトずつ、任意のデータで埋める関数
  * ・メモリブロックの先頭からbyteIndexバイト先のデータを読み出す関数
  * ・メモリブロックのチェックサムを計算する関数
  */
-void setMemoryBlock( unsigned char *memoryBlock, unsigned char *data, int dataSize );
-unsigned char getByteMemory( unsigned char *memoryBlock, int byteIndex );
-unsigned char checkSum( unsigned char *memoryBlock, int num );
+void setMemoryBlock( unsigned char *memoryBlock, unsigned char *data, int dataSize ); // メモリブロック任意のデータで埋める
+unsigned char getByteMemory( unsigned char *memoryBlock, int byteIndex ); // メモリブロックの任意の位置のデータを得る関数
+unsigned char checkSum( unsigned char *memoryBlock, int num ); // メモリブロックのチェックサム計算
 
 /* ### 与えられた文字列をアッパーキャメルに変換する関数(work20) ### */
 void convUpperCamel(char *str);
@@ -150,8 +152,8 @@ typedef struct playerParam{
 PlayerParam sumPlayerParam(PlayerParam *data, int dataNum);
 
 /* ### 与えられた数字の2の補数を求める関数を作成・利用して、aからbを引く関数を作成せよ(work22) ### */
-int complement2( int data );
-int subUsedcomplement2(int a, int b);
+int complement2( int data ); // ２の補数を得る
+int subUsedcomplement2(int a, int b); // 上記関数を用いてa-bを計算する関数
 
 /* ### 第１引数のポインタのポインタに対して、下記の処理をする関数を作成せよ(work23) ###  
  * ・先頭要素(第1要素)のポインタをNULLにする
@@ -162,7 +164,7 @@ void changePtrPtr(int **pPtr, int *p);
 /* ### 既存の「奇数を判定する関数」を用いて、与えられた２値間の奇数の個数を求める関数を作成せよ(work24) ### */
 int checkOdd(int startNum, int endNum, int (*func)(int num));
 
-/* ### 配列の指定された要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
+/* ### 配列の中から指定された数字と同じ要素を探し、その要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
 int *searchItem( int vec[], int vecSize, int matchNumber );
 
 /* ### 下記２値乗算ができるように、void *を引数とするmulVoidPtr関数の実装をしなさい(work26) ### */
@@ -175,8 +177,8 @@ int cubeFunc(double num);
 int getLength(const char *string);
 
 /* ### blockSize分のメモリを確保しbasePatternで埋めよ。さらに先頭startByte目からendByte目までをsubPatternで埋めよ(work29) ### */
-unsigned char *allocBlock(int blockSize, unsigned char basePattern);
-void fillBlock(unsigned char* memBlock, int startFillByte, int endFillByte, unsigned char subPattern);
+unsigned char *allocBlock(int blockSize, unsigned char basePattern); // basePatternで埋めたメモリブロックを割り当て
+void fillBlock(unsigned char* memBlock, int startFillByte, int endFillByte, unsigned char subPattern); // メモリブロックの任意の場所を指定したパターンで埋め直す
 
 /* ### エンディアンを調べる関数を作成せよ。ただし処理系によるint幅に依存しないこと(work30) ### */
 int isBigEndian(void);

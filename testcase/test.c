@@ -1,11 +1,7 @@
 #include <criterion/criterion.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
 #include "common_work.h"
 
-/* ### 整数値aとbの値をスワップさせるswap関数を作成せよ。(work01) ### */
+/* ### 整数値aとbの値を入れ替える関数を作成せよ。(work01) ### */
 Test(execise, 1) {
 	int a, b;
 
@@ -24,8 +20,8 @@ Test(execise, 1) {
 Test(execise, 2) {
 	char dstStr[] = "";
     
-	my_strcpy(dstStr, "Php");
-	cr_assert(strcmp(dstStr, "PHP") == 0);
+	my_strcpy(dstStr, "Cygames");
+	cr_assert(strcmp(dstStr, "CYGAMES") == 0);
 
 	my_strcpy(dstStr, "JavaScript");
 	cr_assert(strcmp(dstStr, "JAVASCRIPT") == 0);
@@ -57,7 +53,7 @@ Test(execise, 4) {
 	cr_assert(strcmp(list[6].name, "トマト") == 0);
 }
 
-/* ### 任意の人物たちの「名前」と「年齢」と次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### */
+/* ### 任意の人物の「名前」と「年齢」を次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### */
 Test(execise, 5) {
 	MemberList *head = NULL; /* 先頭ポインタ */
 	char *name[] = {
@@ -71,6 +67,7 @@ Test(execise, 5) {
 	}
 
 	MemberList *p = head;
+	cr_assert(head !=  NULL);
 	cr_assert(strcmp(p->name, "ashihara") == 0); p = p->next;
 	cr_assert(strcmp(p->name, "matsuo")   == 0); p = p->next;
 	cr_assert(strcmp(p->name, "yamamoto") == 0); p = p->next;
@@ -80,7 +77,7 @@ Test(execise, 5) {
 	free_list(head);
 }
 
-/* ### 下記ビット配置のARGB8888フォーマットにおけるGreen値を抽出せよ(work6) ### */
+/* ### 下記ビット配置のARGB8888フォーマットにおけるGreen値を抽出する関数を作成せよ(work6) ### */
 #define ARGB8888(a,r,g,b)  ((unsigned int)((((a) & 0xff)<<24) | (((r) & 0xff)<<16) | (((g) & 0xff)<<8) | ((b) & 0xff)))
 
 Test(execise, 6) {
@@ -96,11 +93,16 @@ Test(execise, 6) {
 Test(execise, 7) {
 	const char csvData[]="SQL,C,PHP,JavaScript,Linux,HTML,bash";
 
+	char *itemStr;
 	char *copyStr = (char *)malloc(sizeof(csvData));
 	strcpy(copyStr, csvData);
-	cr_assert(strcmp(getItemCSV(copyStr, 0), "SQL") == 0);
+	itemStr = getItemCSV(copyStr, 0);
+	cr_assert(itemStr != NULL);
+	cr_assert(strcmp(itemStr, "SQL") == 0);
 	strcpy(copyStr, csvData);
-	cr_assert(strcmp(getItemCSV(copyStr, 5), "HTML") == 0);
+	itemStr = getItemCSV(copyStr, 5);
+	cr_assert(itemStr != NULL);
+	cr_assert(strcmp(itemStr, "HTML") == 0);
 
 	free(copyStr);
 }
@@ -128,15 +130,18 @@ Test(execise, 10) {
 
 	cr_assert(ts.charSize == 1);
 	cr_assert(ts.charPtrSize == 8);
+	cr_assert(ts.shortSize == 2);
+	cr_assert(ts.shortPtrSize == 8);
 	cr_assert(ts.intSize == 4);
 	cr_assert(ts.intPtrSize == 8);
 	cr_assert(ts.longSize == 8);
+	cr_assert(ts.longPtrSize == 8);
 	cr_assert(ts.floatSize == 4);
 	cr_assert(ts.floatPtrSize == 8);
 	cr_assert(ts.doubleSize == 8);
 	cr_assert(ts.doublePtrSize == 8);
 	cr_assert(ts.thisStructPtrSize == 8);
-	cr_assert(ts.thisStructSize == 44);
+	cr_assert(ts.thisStructSize == 56);
 }
 
 /* ### 下記の方法で生成した16bitデータを返す関数を作成せよ(work11) ### 
@@ -149,7 +154,7 @@ Test(execise, 11) {
 	cr_assert(make16BitReverseData(0xff00, 0x00ff) == 0xffff);
 }
 
- // 小数点以下を四捨五入ならぬ七捨八入する関数を自作せよ(work12)
+/* ### 0.1刻みでカウントダウンする関数を作成せよ。また初期値を設定する関数も作成すること(work12) ### */
 Test(execise, 12) {
 	resetCount(1.0f);
 
@@ -165,7 +170,7 @@ Test(execise, 12) {
 	cr_assert(countDown() == 0.0f);
 }
 
-/* ### 任意の数のポインターの配列を使って、それぞれに1バイト領域を割り当て、要素をtestByteで埋めたのち、解放せよ(work13) ### */
+/* ### 任意の数のポインターの配列を使ってそれぞれに1バイト領域を割り当て、各要素をtestByteで埋めたのち、解放せよ(work13) ### */
 #define ARRAY_NUM   3
 
 Test(execise, 13) {
@@ -205,7 +210,7 @@ Test(execise, 14) {
 Test(execise, 15) {
 	char testStr[] = "abcdefghijklmnopqrstuvwxyz";
 
-	cr_assert(searchChar(testStr, 'd') == 3);  // d
+	cr_assert(searchChar(testStr, 'd') == 3);
 	cr_assert(searchChar(testStr, '@') == -1);  // 不正文字
 }
 
@@ -368,16 +373,16 @@ Test(execise, 24) {
 	cr_assert(checkOdd(0, 3, isOddNum) == 2);	
 }
 
-/* ### 配列の指定された要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
+/* ### 配列の中から指定された数字と同じ要素を探し、その要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
 Test(execise, 25) {
 	int numVec[] = { 23, 4, 2, 11, 8, 99, 0 };
 	int numVecSize = sizeof(numVec)/sizeof(int);
 	int *p;
 
-	p = searchItem(numVec, numVecSize, 99);
+	p = searchItem(numVec, numVecSize, 99); // 配列データから"99"の要素を探す
 	cr_assert(p != NULL);
-	cr_assert(p-numVec == 5);
-	cr_assert(*p == 99);
+	cr_assert(p-numVec == 5); // 配列中の位置を調べる
+	cr_assert(*p == 99); // 内容は確かに99
 
 	p = searchItem(numVec, numVecSize, 22);
 	cr_assert(p == NULL);

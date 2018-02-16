@@ -10,6 +10,8 @@ int isBigEndian(void)
 	if( *(char *)&x == 0x0 ){
 		result = 1;
 	}
+#else
+	result = -1;
 #endif
 	return result;
 }
