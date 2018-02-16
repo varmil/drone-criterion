@@ -10,10 +10,10 @@ PlayerParam sumPlayerParam(PlayerParam *data, int dataNum)
 	int i;
 	sumParam.win = sumParam.lose = sumParam.draw = 0;
 
-	for( i=0 ; i < dataNum ; i++ ){
-		sumParam.win 	+= data->win;
-		sumParam.lose	+= data->lose;
-		sumParam.draw	+= data->draw;
+	for(i=0 ; i < dataNum ; i++){
+		sumParam.win  += data->win;
+		sumParam.lose += data->lose;
+		sumParam.draw += data->draw;
 		data++;
 	}
 #endif

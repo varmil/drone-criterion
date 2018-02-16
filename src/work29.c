@@ -16,6 +16,6 @@ unsigned char *allocBlock(int blockSize, unsigned char basePattern)
 void fillBlock(unsigned char* memBlock, int startFillByte, int endFillByte, unsigned char subPattern)
 {
 #ifdef _ANSWER_
-	memset( memBlock + startFillByte - 1, subPattern, endFillByte - startFillByte + 1 );
+	memset(memBlock + startFillByte - 1, subPattern, endFillByte - startFillByte + 1);
 #endif
 }

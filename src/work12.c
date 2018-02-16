@@ -1,5 +1,4 @@
 #include "common_work.h"
-#include <stdio.h>
 
 #ifdef _ANSWER_
 static int result;

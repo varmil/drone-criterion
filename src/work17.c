@@ -7,7 +7,7 @@ unsigned char rotateLeft(unsigned char val)
 	unsigned char result = 0x0;
 
 #ifdef _ANSWER_
-	if( val & 0x80 ){
+	if(val & 0x80){
 		result = 0x01;
 	}
 	result |= (val << 1);

@@ -1,7 +1,7 @@
 #include "common_work.h"
 #include <stdio.h>
 
-double mulVoidPtr( void *a, void *b )
+double mulVoidPtr(void *a, void *b)
 {
 	double result = 0.0;
 

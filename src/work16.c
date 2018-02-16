@@ -10,7 +10,7 @@ int calcSubjectAverage(Student *students, int num, Subject subject)
 #ifdef _ANSWER_
 	int i;
 	int sum = 0;
-	for( i=0 ; i<num ; i++ ){
+	for(i=0 ; i<num ; i++){
 		sum += students[i].grade.subjects[subject];
 	}
 	ave = (int)( sum / num);
@@ -25,13 +25,13 @@ int calcAllAverage(Student *students, int num)
 #ifdef _ANSWER_
 	int i, j;
 	int sum = 0;
-	for( i=0 ; i<num ; i++ ){
+	for(i=0 ; i<num ; i++){
 		Grade *pGrade = &students[i].grade;
-		for( j=0 ; j<SUBJECT_MAX ; j++ ){
+		for(j=0 ; j<SUBJECT_MAX ; j++){
 			sum += pGrade->subjects[j];
 		}
 	}
-	ave = (int)( sum / ( num * SUBJECT_MAX ));
+	ave = (int)(sum / (num * SUBJECT_MAX));
 #endif
 	return ave;
 }
@@ -43,8 +43,8 @@ Grade *getGrade(Student *students, int num, char *studentName)
 #ifdef _ANSWER_
 	int i;
 
-	for( i=0 ; i<num ; i++ ){
-		if( strcmp( students->name, studentName ) == 0 ){
+	for(i=0 ; i<num ; i++){
+		if(strcmp(students->name, studentName) == 0){
 			grade = &students->grade;
 		}
 		else{

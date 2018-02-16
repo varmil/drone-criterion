@@ -8,7 +8,7 @@ int *searchItem( int vec[], int vecSize, int matchNumber )
 #ifdef _ANSWER_
 	int i;
 	for( i=0 ; i<vecSize ; i++ ){
-		if(vec[i]==matchNumber){
+		if(vec[i] == matchNumber){
 			pResult = vec + i;
 		}
 	}

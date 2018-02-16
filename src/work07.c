@@ -12,8 +12,8 @@ char *getItemCSV(const char *csvData, int index)
 	if( index!=0 ){
 		int i = 1;
 
-		while( (findString = strtok(NULL, ",")) != NULL ){
-			if( i == index ){
+		while((findString = strtok(NULL, ",")) != NULL){
+			if(i == index){
 				break;
 			}
 			i++;

@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #ifdef _ANSWER_
-extern double cubeDouble( double num );
+extern double cubeDouble(double num);
 #endif
 
 int cubeFunc(double num)

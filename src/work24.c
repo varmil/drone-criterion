@@ -8,8 +8,8 @@ int checkOdd(int startNum, int endNum, int (*func)(int num))
 #ifdef _ANSWER_
 	int i;
 
-	for( i = startNum ; i <= endNum ; i++ ){
-		if( func(i) == 1 ){
+	for(i = startNum ; i <= endNum ; i++){
+		if(func(i) == 1){
 			result++;
 		}
 	}

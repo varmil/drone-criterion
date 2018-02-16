@@ -17,7 +17,7 @@ typedef struct {
 	int price;          // 価格
 } Juice;
 
-void sortPrice( Juice *list, int n );
+void sortPrice(Juice *list, int n);
 
 /* ### 任意の人物の「名前」と「年齢」を次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### */
 typedef struct memberlist{
@@ -135,9 +135,9 @@ int strlaststr(char *strSrc, char *strMatch);
  * ・メモリブロックの先頭からbyteIndexバイト先のデータを読み出す関数
  * ・メモリブロックのチェックサムを計算する関数
  */
-void setMemoryBlock( unsigned char *memoryBlock, unsigned char *data, int dataSize ); // メモリブロック任意のデータで埋める
-unsigned char getByteMemory( unsigned char *memoryBlock, int byteIndex ); // メモリブロックの任意の位置のデータを得る関数
-unsigned char checkSum( unsigned char *memoryBlock, int num ); // メモリブロックのチェックサム計算
+void setMemoryBlock(unsigned char *memoryBlock, unsigned char *data, int dataSize); // メモリブロック任意のデータで埋める
+unsigned char getByteMemory(unsigned char *memoryBlock, int byteIndex); // メモリブロックの任意の位置のデータを得る関数
+unsigned char checkSum(unsigned char *memoryBlock, int num); // メモリブロックのチェックサム計算
 
 /* ### 与えられた文字列をアッパーキャメルに変換する関数(work20) ### */
 void convUpperCamel(char *str);
@@ -152,23 +152,23 @@ typedef struct playerParam{
 PlayerParam sumPlayerParam(PlayerParam *data, int dataNum);
 
 /* ### 与えられた数字の2の補数を求める関数を作成・利用して、aからbを引く関数を作成せよ(work22) ### */
-int complement2( int data ); // ２の補数を得る
+int complement2(int data); // ２の補数を得る
 int subUsedcomplement2(int a, int b); // 上記関数を用いてa-bを計算する関数
 
 /* ### 第１引数のポインタのポインタに対して、下記の処理をする関数を作成せよ(work23) ###  
  * ・先頭要素(第1要素)のポインタをNULLにする
  * ・代わりに第2要素に関数の第２引数のポインタを格納する
  */
-void changePtrPtr(int **pPtr, int *p);
+void changePtrPtr(int **pPtr, int * const p);
 
 /* ### 既存の「奇数を判定する関数」を用いて、与えられた２値間の奇数の個数を求める関数を作成せよ(work24) ### */
 int checkOdd(int startNum, int endNum, int (*func)(int num));
 
 /* ### 配列の中から指定された数字と同じ要素を探し、その要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
-int *searchItem( int vec[], int vecSize, int matchNumber );
+int *searchItem(int vec[], int vecSize, int matchNumber);
 
-/* ### 下記２値乗算ができるように、void *を引数とするmulVoidPtr関数の実装をしなさい(work26) ### */
-double mulVoidPtr( void *a, void *b );
+/* ### 下記２値で乗算ができるように、void *を引数とするmulVoidPtr関数の実装をしなさい(work26) ### */
+double mulVoidPtr(void *a, void *b);
 
 /* ### 下記関数をつかって数学ライブラリを用いずに3乘を求める関数を作成せよ。ただし、小数点以下は四捨五入すること(work27) ### */
 int cubeFunc(double num);

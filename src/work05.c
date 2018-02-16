@@ -19,14 +19,14 @@ MemberList* add_list(int key, char *name, MemberList *head)
 	p->key = key;
 	strcpy(p->name, name);
 
-	if( head==NULL ){ // ヘッダ要素なければ追加
+	if(head==NULL){ // ヘッダ要素なければ追加
 		head = p;
 		p->next = NULL;
 	}
 	else{
 		// 末尾探索
 		MemberList *itr = head;
-		while( itr->next != NULL ){
+		while(itr->next != NULL){
 			itr = itr->next;
 		}
 		// 要素追加

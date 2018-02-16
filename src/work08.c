@@ -14,9 +14,8 @@ char *strweek(int n)
 		"",
 	};
 
-	return( ((n >= 0) && (n <= 6)) ? week[n] : week[7] );
+	return(((n >= 0) && (n <= 6)) ? week[n] : week[7]);
 #else
-
 	return("");
 #endif
 }

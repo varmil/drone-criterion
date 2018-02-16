@@ -36,11 +36,12 @@ Test(execise, 3) {
 
 /* ### 下記データを価格の高い順にソートする関数を作成せよ。(work04) ### */
 Test(execise, 4) {
-	Juice list[] =
-		{ { 5200, "オレンジ", 1000 }, { 3010, "アップル", 840 }
-		, { 2020, "パイナップル", 525 }, { 3020, "グレープ", 720 }
-		, { 2030, "レモン", 500 }, { 2010, "トマト", 450 }
-		, { 5050, "ドリアン", 1200 } };
+	Juice list[] = {
+		{ 5200, "オレンジ", 1000 }, { 3010, "アップル", 840 },
+		{ 2020, "パイナップル", 525 }, { 3020, "グレープ", 720 },
+		{ 2030, "レモン", 500 }, { 2010, "トマト", 450 },
+		{ 5050, "ドリアン", 1200 }
+	};
 
 	sortPrice( list, sizeof(list)/sizeof(Juice) );
 
@@ -69,9 +70,9 @@ Test(execise, 5) {
 	MemberList *p = head;
 	cr_assert(head !=  NULL);
 	cr_assert(strcmp(p->name, "ashihara") == 0); p = p->next;
-	cr_assert(strcmp(p->name, "matsuo")   == 0); p = p->next;
+	cr_assert(strcmp(p->name, "matsuo") == 0); 	 p = p->next;
 	cr_assert(strcmp(p->name, "yamamoto") == 0); p = p->next;
-	cr_assert(strcmp(p->name, "kuwata")   == 0);
+	cr_assert(strcmp(p->name, "kuwata") == 0);
 
 	/* リストの開放 */
 	free_list(head);
@@ -81,20 +82,26 @@ Test(execise, 5) {
 #define ARGB8888(a,r,g,b)  ((unsigned int)((((a) & 0xff)<<24) | (((r) & 0xff)<<16) | (((g) & 0xff)<<8) | ((b) & 0xff)))
 
 Test(execise, 6) {
-	unsigned int argbColor = ARGB8888(0x12, 0x34, 0x56, 0x78);
-	unsigned int colorG = 0x00;
+	unsigned int argbColor;
+	unsigned int colorG;
 
+	argbColor = ARGB8888(0x12, 0x34, 0x56, 0x78);
+	colorG = 0x00;
 	colorG = PickupGreen(argbColor);
-
 	cr_assert(colorG == 0x56);
+
+	argbColor = ARGB8888(0x98, 0x76, 0x54, 0x32);
+	colorG = 0x00;
+	colorG = PickupGreen(argbColor);
+	cr_assert(colorG == 0x54);
 }
 
 /* ### カンマ区切りの文字列データのn番目の要素(文字列)を取り出す関数を作成せよ(work7) ### */
 Test(execise, 7) {
 	const char csvData[]="SQL,C,PHP,JavaScript,Linux,HTML,bash";
-
-	char *itemStr;
 	char *copyStr = (char *)malloc(sizeof(csvData));
+	char *itemStr;
+
 	strcpy(copyStr, csvData);
 	itemStr = getItemCSV(copyStr, 0);
 	cr_assert(itemStr != NULL);
@@ -174,7 +181,7 @@ Test(execise, 12) {
 #define ARRAY_NUM   3
 
 Test(execise, 13) {
-	unsigned char *p[ARRAY_NUM] = { NULL, NULL, NULL };
+	unsigned char *p[ARRAY_NUM] = {NULL, NULL, NULL};
 	unsigned char testByte = 0xbe;
 
 	allocMyArray( p, ARRAY_NUM, testByte );
@@ -200,17 +207,18 @@ Test(execise, 14) {
 	unsigned char a = 0xc5;
 	unsigned char b = 0x96;
 
-	cr_assert(calcReverse(a)        == 0x3a); // 反転
-	cr_assert(calcXOR(a, b)         == 0x53); // 排他的論理和
-	cr_assert(calcBitMask(a, b)     == 0x84); // ビットマスク
-	cr_assert(calcBitEnable(a, b)   == 0xd7); // 特定ビットを常に有効にする
+	cr_assert(calcReverse(a) == 0x3a); // 反転
+	cr_assert(calcXOR(a, b) == 0x53); // 排他的論理和
+	cr_assert(calcBitMask(a, b) == 0x84); // ビットマスク
+	cr_assert(calcBitEnable(a, b) == 0xd7); // 特定ビットを常に有効にする
 }
 
 /* ### 文字列から任意の文字が初めて出現する位置を求める関数を作成せよ(work15) ### */
 Test(execise, 15) {
-	char testStr[] = "abcdefghijklmnopqrstuvwxyz";
+	char testStr[] = "abcdefghijklm";
 
 	cr_assert(searchChar(testStr, 'd') == 3);
+	cr_assert(searchChar(testStr, 'm') == 12);
 	cr_assert(searchChar(testStr, '@') == -1);  // 不正文字
 }
 
@@ -221,9 +229,9 @@ Test(execise, 15) {
  */
 Test(execise, 16) {
 	Student students[]={
-		{ "yamamoto",{100,100,100,100 } },
-		{ "kuwata",  { 10, 20, 30, 40 } },
-		{ "iggy",    { 12, 34, 56, 78 } },
+		{"yamamoto", {100,100,100,100}},
+		{"kuwata", 	 { 10, 20, 30, 40}},
+		{"iggy", 	 { 12, 34, 56, 78}},
 	};
 
 	int num = sizeof(students)/sizeof(Student);
@@ -334,18 +342,16 @@ Test(execise, 22) {
 	cr_assert(subUsedcomplement2(2, 5) == -3);
 }
 
-/* ### 第１引数のポインタのポインタに対して、下記の処理をする関数を作成せよ(work23) ###  
+/* ### 第１引数のポインタのポインタに対して、下記のポインタ処理をする関数を作成せよ(work23) ###  
  * ・先頭要素(第1要素)のポインタをNULLにする
  * ・代わりに第2要素に関数の第２引数のポインタを格納する
  */
 Test(execise, 23) {
 	int testData = 999;
-	int *p = &testData;
-	int *pPtr[] = {p, NULL, NULL};
+	int * const p = &testData;
+	int *pPtr[] = {p, NULL};
 
 	changePtrPtr(pPtr, p);
-
-	// pPtr[] = {NULL, p, NULL};
 	cr_assert(pPtr[0] == NULL); 	
 	cr_assert(pPtr[1] != NULL);
 	cr_assert(*pPtr[1] == 999);
@@ -360,7 +366,7 @@ static int isOddNum(int num)
 	if( num % 2 ){
 		result = 1;
 	}
-	return(result) ;
+	return(result);
 }
 
 Test(execise, 24) {
@@ -370,30 +376,40 @@ Test(execise, 24) {
 
 	cr_assert(checkOdd(0, 1, isOddNum) == 1);	
 	cr_assert(checkOdd(0, 2, isOddNum) == 1);	
-	cr_assert(checkOdd(0, 3, isOddNum) == 2);	
+	cr_assert(checkOdd(0, 3, isOddNum) == 2);
+	cr_assert(checkOdd(5, 10, isOddNum) == 3);
 }
 
 /* ### 配列の中から指定された数字と同じ要素を探し、その要素へのポインタを返す関数を作成せよ。ただし、見つからなかった場合はNULLを返すこと(work25) ### */
 Test(execise, 25) {
-	int numVec[] = { 23, 4, 2, 11, 8, 99, 0 };
+	int numVec[] = {23, 4, 2, 11, 8, 99, 0};
 	int numVecSize = sizeof(numVec)/sizeof(int);
 	int *p;
 
-	p = searchItem(numVec, numVecSize, 99); // 配列データから"99"の要素を探す
+	p = searchItem(numVec, numVecSize, 99); // 配列データから99の要素を探す
 	cr_assert(p != NULL);
 	cr_assert(p-numVec == 5); // 配列中の位置を調べる
 	cr_assert(*p == 99); // 内容は確かに99
 
-	p = searchItem(numVec, numVecSize, 22);
+	p = searchItem(numVec, numVecSize, 4); // 配列データから4の要素を探す
+	cr_assert(p != NULL);
+	cr_assert(p-numVec == 1); // 配列中の位置を調べる
+	cr_assert(*p == 4); // 内容は確かに4
+
+	p = searchItem(numVec, numVecSize, 22); // 存在しない数字
 	cr_assert(p == NULL);
 }
 
-/* ### 下記２値乗算ができるように、void *を引数とするmulVoidPtr関数の実装をしなさい(work26) ### */
+/* ### 下記２値で乗算ができるように、void *を引数とするmulVoidPtr関数の実装をしなさい(work26) ### */
 Test(execise, 26) {
-	double a = 2.5;
-	int b = 4;
-
+	double a;
+	int b;
+	
+	a = 2.5; b = 4;
 	cr_assert(mulVoidPtr(&a, &b) == 10.0);
+
+	a = 5.5; b = 3;
+	cr_assert(mulVoidPtr(&a, &b) == 16.5);
 }
 
 /* ### 下記関数をつかって数学ライブラリを用いずに3乘を求める関数を作成せよ。ただし、小数点以下は四捨五入すること(work27) ### */
