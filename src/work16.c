@@ -1,7 +1,6 @@
-#include "common_work.h"
-
-#include <stdio.h>
 #include <string.h>
+
+#include "common_work.h"
 
 int calcSubjectAverage(Student *students, int num, Subject subject)
 {

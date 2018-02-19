@@ -1,5 +1,6 @@
-#include "common_work.h"
 #include <ctype.h>
+
+#include "common_work.h"
 
 void convUpperCamel(char *str)
 {

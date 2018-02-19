@@ -1,5 +1,4 @@
 #include "common_work.h"
-#include <stdio.h>
 
 unsigned int getSubBit(unsigned int baseData, int n, int m)
 {

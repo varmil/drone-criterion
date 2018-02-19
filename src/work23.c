@@ -1,5 +1,4 @@
 #include "common_work.h"
-#include <stdio.h>
 
 void changePtrPtr(int **pPtr, int * const p)
 {

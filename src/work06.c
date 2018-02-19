@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "common_work.h"
 
 unsigned int PickupGreen(unsigned int argb)

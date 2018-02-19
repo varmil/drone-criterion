@@ -1,5 +1,4 @@
 #include "common_work.h"
-#include <stdio.h>
 
 int *searchItem( int vec[], int vecSize, int matchNumber )
 {

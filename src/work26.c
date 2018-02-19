@@ -1,5 +1,4 @@
 #include "common_work.h"
-#include <stdio.h>
 
 double mulVoidPtr(void *a, void *b)
 {

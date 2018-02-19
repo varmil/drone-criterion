@@ -1,3 +1,5 @@
+#include<stddef.h>
+
 #define _ANSWER_
 
 /* ### 整数値aとbの値を入れ替える関数を作成せよ。(work01) ### */
@@ -19,7 +21,9 @@ typedef struct {
 
 void sortPrice(Juice *list, int n);
 
-/* ### 任意の人物の「名前」と「年齢」を次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### */
+/* ### 任意の人物の「名前」と「年齢」を次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### 
+ * ただし、リストの末尾の次の要素はNULLとする。
+ */
 typedef struct memberlist{
 	int key;				// キー
 	char name[NAMELEN];		// 名前 

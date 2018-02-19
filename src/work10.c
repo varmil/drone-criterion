@@ -1,7 +1,5 @@
 #include "common_work.h"
 
-#include<stdio.h>
-
 TypeSize getTypeSize(void)
 {
 	TypeSize ts;

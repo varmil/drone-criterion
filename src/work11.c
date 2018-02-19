@@ -1,7 +1,5 @@
 #include "common_work.h"
 
-#include<stdio.h>
-
 unsigned int make16BitReverseData(unsigned int data1, unsigned int data2)
 {
 	unsigned int newData = 0x0;

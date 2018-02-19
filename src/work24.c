@@ -1,5 +1,4 @@
 #include "common_work.h"
-#include <stdio.h>
 
 int checkOdd(int startNum, int endNum, int (*func)(int num))
 {

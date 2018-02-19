@@ -1,6 +1,6 @@
-#include "common_work.h"
-
 #include <string.h>
+
+#include "common_work.h"
 
 int strlaststr(char *strSrc, char *strMatch)
 {

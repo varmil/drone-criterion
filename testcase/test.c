@@ -1,17 +1,19 @@
 #include <criterion/criterion.h>
 #include "common_work.h"
 
+#include<stdio.h>
+
 /* ### 整数値aとbの値を入れ替える関数を作成せよ。(work01) ### */
 Test(execise, 1) {
 	int a, b;
 
 	a = 10; b = 20;
-	change( &a, &b );
+	change(&a, &b);
 	cr_assert(a == 20);
 	cr_assert(b == 10);
 
 	a = 27; b = 9;
-	change( &a, &b );
+	change(&a, &b);
 	cr_assert(a == 9);
 	cr_assert(b == 27);
 }
@@ -43,7 +45,7 @@ Test(execise, 4) {
 		{ 5050, "ドリアン", 1200 }
 	};
 
-	sortPrice( list, sizeof(list)/sizeof(Juice) );
+	sortPrice(list, sizeof(list)/sizeof(Juice));
 
 	cr_assert(strcmp(list[0].name, "ドリアン") == 0);
 	cr_assert(strcmp(list[1].name, "オレンジ") == 0);
@@ -54,7 +56,9 @@ Test(execise, 4) {
 	cr_assert(strcmp(list[6].name, "トマト") == 0);
 }
 
-/* ### 任意の人物の「名前」と「年齢」を次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### */
+/* ### 任意の人物の「名前」と「年齢」を次々リストに登録する関数と、リストを解放する関数を作成せよ。(work05) ### 
+ * ただし、リストの末尾の次の要素はNULLとする。
+ */
 Test(execise, 5) {
 	MemberList *head = NULL; /* 先頭ポインタ */
 	char *name[] = {
@@ -63,7 +67,7 @@ Test(execise, 5) {
 	int num = sizeof(name)/sizeof(*name);
 	int indexNo;
 
-	for( indexNo = 0 ; indexNo < num ; indexNo++ ){
+	for(indexNo = 0 ; indexNo < num ; indexNo++){
 		head = add_list(indexNo, name[indexNo], head);
 	}
 
@@ -73,6 +77,7 @@ Test(execise, 5) {
 	cr_assert(strcmp(p->name, "matsuo") == 0); 	 p = p->next;
 	cr_assert(strcmp(p->name, "yamamoto") == 0); p = p->next;
 	cr_assert(strcmp(p->name, "kuwata") == 0);
+	cr_assert(head->next->next->next->next == NULL);
 
 	/* リストの開放 */
 	free_list(head);
@@ -184,7 +189,7 @@ Test(execise, 13) {
 	unsigned char *p[ARRAY_NUM] = {NULL, NULL, NULL};
 	unsigned char testByte = 0xbe;
 
-	allocMyArray( p, ARRAY_NUM, testByte );
+	allocMyArray(p, ARRAY_NUM, testByte);
 
 	cr_assert(p[0] != NULL);
 	cr_assert(p[1] != NULL);
@@ -229,9 +234,9 @@ Test(execise, 15) {
  */
 Test(execise, 16) {
 	Student students[]={
-		{"yamamoto", {100,100,100,100}},
-		{"kuwata", 	 { 10, 20, 30, 40}},
-		{"iggy", 	 { 12, 34, 56, 78}},
+		{"yamamoto",{100,100,100,100}},
+		{"kuwata",	{ 10, 20, 30, 40}},
+		{"iggy",	{ 12, 34, 56, 78}},
 	};
 
 	int num = sizeof(students)/sizeof(Student);
@@ -239,7 +244,7 @@ Test(execise, 16) {
 	cr_assert(calcAllAverage(students, num) == 56);
 	Grade *grade = getGrade(students, num, "kuwata");
 	cr_assert(grade != NULL);
-//	if( grade ){
+//	if(grade){
 		cr_assert(grade->subjects[ENGLISH] == 10);
 //	}
 }
@@ -288,14 +293,14 @@ Test(execise, 18) {
  */
 Test(execise, 19) {
 	const int dataSize = 4;
-	unsigned char *memoryBlock = (unsigned char *)calloc(dataSize, sizeof(unsigned char));
+	unsigned char *memoryBlock = (unsigned char *)calloc(1, sizeof(unsigned char)*dataSize);
 	char data[] = { 0x12, 0x34, 0x56, 0x78 };
 
 	setMemoryBlock(memoryBlock, data, dataSize);
 	cr_assert(getByteMemory(memoryBlock, 2) == 0x56);
 	cr_assert(checkSum(memoryBlock, dataSize) == 0x14);
 
-	free( memoryBlock );
+	free(memoryBlock);
 }
 
 /* ### 与えられた文字列をアッパーキャメルに変換する関数(work20) ### */
@@ -363,7 +368,7 @@ static int isOddNum(int num)
 {
 	int result = 0;
 
-	if( num % 2 ){
+	if(num % 2){
 		result = 1;
 	}
 	return(result);

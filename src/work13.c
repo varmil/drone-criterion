@@ -1,5 +1,6 @@
-#include "common_work.h"
 #include <stdlib.h>
+
+#include "common_work.h"
 
 void allocMyArray(unsigned char **p, unsigned int num, unsigned short pattern )
 {

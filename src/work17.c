@@ -1,7 +1,5 @@
 #include "common_work.h"
 
-#include <stdio.h>
-
 unsigned char rotateLeft(unsigned char val)
 {
 	unsigned char result = 0x0;

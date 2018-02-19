@@ -1,6 +1,6 @@
-#include "common_work.h"
 #include <ctype.h>
-#include <stdio.h>
+
+#include "common_work.h"
 
 PlayerParam sumPlayerParam(PlayerParam *data, int dataNum)
 {
